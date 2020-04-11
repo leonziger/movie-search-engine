@@ -17,8 +17,8 @@ class Navbar extends React.Component {
                     <span className="navbar-title">Pages:</span> {
                         this.state.pages.map(
                             page =>
-                                <div className="navbar-pages" key="{page}"
-                                     onClick={this.props.changePage.bind()}
+                                <div className="navbar-pages" key={page}
+                                     onClick={this.props.changePage()}
                                 >
                                     {page}
                                 </div>

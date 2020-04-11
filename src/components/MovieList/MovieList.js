@@ -10,11 +10,11 @@ class MovieList extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    {/*{this.state.movies.map(movie =>*/}
-                        {/*<MovieItem key={movie.id} movie={movie}*/}
-                        {/*>*/}
-                        {/*</MovieItem>*/}
-                    {/*)}*/}
+                    {this.state.movies.map(movie =>
+                        <MovieItem key={movie.id} movie={movie}
+                        >
+                        </MovieItem>
+                    )}
                 </div>
             </div>
         );

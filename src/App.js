@@ -43,7 +43,7 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        this.fetchMoves();
+        this.fetchMoves(this.state.movieList_showPage);
     }
 
     render() {
