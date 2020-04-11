@@ -42,10 +42,6 @@ class App extends React.Component {
         this.fetchMovies(this.state.movieList_showPage);
     }
 
-    componentDidMount(){
-        this.fetchMoves(this.state.movieList_showPage);
-    }
-
     render() {
         return (
             <div>
