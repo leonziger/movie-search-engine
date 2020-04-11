@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "babel-plugin-transform-react-statements": "^0.7.3",
     "bootstrap": "^4.4.1",
+    "gh-pages": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
