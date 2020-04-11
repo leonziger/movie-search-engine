@@ -9,11 +9,6 @@ class Navbar extends React.Component {
         }
     }
 
-    componentDidMount(props) {
-        console.log('Navbar props', this.props);
-        console.log('Navbar props', this.props.changePage)
-    }
-
     render() {
         return (
 

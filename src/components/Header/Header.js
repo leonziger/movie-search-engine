@@ -3,14 +3,6 @@ import './Header.css';
 import Navbar from './../Navbar/Navbar';
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(props) {
-        console.log('Header props', this.props)
-    }
-
     render() {
         return (
             <div className="header">
