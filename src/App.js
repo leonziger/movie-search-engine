@@ -10,18 +10,24 @@ class App extends React.Component {
         super();
 
         this.state = {
-            movies: [],
-            page: 1
+            movieList_showPage: 10,
         }
     }
 
-    changePage
+    changePage(e) {
+        e.preventDefault();
+        const updateShowPage = Number(e.target.innerHTML);
+        console.log(updateShowPage);
+        this.setState({
+            movieList_showPage: updateShowPage
+        });
+    }
 
     render() {
         return (
             <div>
-                <Header/>
-                <MovieList page={this.state.page}/>
+                <Header changePage={this.changePage}/>
+                <MovieList page={this.state.movieList_showPage}/>
                 <Footer/>
             </div>
         );

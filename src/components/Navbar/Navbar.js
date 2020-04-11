@@ -9,11 +9,25 @@ class Navbar extends React.Component {
         }
     }
 
+    componentDidMount(props) {
+        console.log('Navbar props', this.props);
+        console.log('Navbar props', this.props.changePage)
+    }
+
     render() {
         return (
+
             <div className="container">
                 <div className="navbar">
-                    <span className="navbar-title">Pages:</span> {this.state.pages.map(page =><div className="navbar-pages" key="{page}" >{page}</div>)}
+                    <span className="navbar-title">Pages:</span> {
+                        this.state.pages.map(
+                            page =>
+                                <div className="navbar-pages" key="{page}"
+                                     onClick={this.props.changePage.bind()}
+                                >
+                                    {page}
+                                </div>
+                        )}
                 </div>
             </div>
         );

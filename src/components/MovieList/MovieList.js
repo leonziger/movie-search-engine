@@ -8,12 +8,12 @@ class MovieList extends React.Component {
         }
 
     async componentDidMount(props) {
-        let currentPage = this.props.page;
-        let url = "https://api.themoviedb.org/3/discover/movie?api_key=ee0f05a0f4bb56e4353f24db8f4f30ef&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page="+currentPage;
-        let movies = await axios.get(
+        const currentPage = this.props.page;
+        const url = "https://api.themoviedb.org/3/discover/movie?api_key=ee0f05a0f4bb56e4353f24db8f4f30ef&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page="+currentPage;
+        const movies = await axios.get(
             url
         );
-        let films = movies.data.results;
+        const films = movies.data.results;
         // console.log(movies);
         this.setState({ movies: films });
     }
