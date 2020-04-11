@@ -1,0 +1,17 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    color: #fff;
+}
+.navbar-title {
+    padding: 5px;
+}
+.navbar-pages {
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+}
+.navbar-pages:hover {
+    text-decoration: underline;
+}
