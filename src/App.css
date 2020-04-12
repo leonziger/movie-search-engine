@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.App-body {
+  min-height: 100vh;
+}
+
+.App-error {
+  color: red;
+  text-align: center;
+  height: 80vh;
+}

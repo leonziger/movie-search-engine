@@ -8,9 +8,7 @@ class MovieList extends React.Component {
             <div className="container">
                 <div className="row">
                     {this.props.movies.map(movie =>
-                        <MovieItem key={movie.id} movie={movie}
-                        >
-                        </MovieItem>
+                        <MovieItem key={movie.id} movie={movie} />
                     )}
                 </div>
             </div>

@@ -9,7 +9,26 @@ class Navbar extends React.Component {
         }
     }
 
-    render() {
+    updatePrevPagesRange() {
+        const prevPagesRange = this.state.pages.map(page => page - 10);
+
+
+        this.setState({
+            pages : prevPagesRange
+        });
+    }
+
+    updateNextPagesRange() {
+        const nextPagesRange = this.state.pages.map(page => page + 10);
+
+        console.log(this.state.pages);
+        this.setState({
+            pages : nextPagesRange
+        });
+    }
+
+
+render() {
         return (
 
             <div className="container">
@@ -17,12 +36,14 @@ class Navbar extends React.Component {
                     <span className="navbar-title">Pages:</span> {
                         this.state.pages.map(
                             page =>
-                                <div className="navbar-pages" key={page}
+                                <div className="navbar-page" key={page}
                                      onClick={this.props.changePage}
                                 >
                                     {page}
                                 </div>
+
                         )}
+                    <button className="navbar-button next-button" onClick={this.updateNextPagesRange}>Next 10 pages</button>
                 </div>
             </div>
         );

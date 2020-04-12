@@ -1,19 +1,38 @@
 .navbar{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     padding: 10px;
     color: #fff;
 }
 .navbar-title {
     padding: 5px;
 }
-.navbar-pages {
+.navbar-page {
     color: #fff;
     padding: 5px 10px;
     text-decoration: none;
     border: 1px solid transparent;
 }
-.navbar-pages:hover {
+.navbar-page_active {
+    pointer-events: none;
+    border: 1px solid white;
+}
+
+.navbar-page:hover {
     cursor: pointer;
     border: 1px solid white;
+}
+
+@media(max-width:480px) {
+    .navbar-title {
+        display: none;
+    }
+    .navbar {
+        justify-content: center;
+    }
+    .navbar-pages {
+        text-align: center;
+        width: 40px;
+    }
 }
