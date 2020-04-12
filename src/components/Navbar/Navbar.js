@@ -18,7 +18,7 @@ class Navbar extends React.Component {
                         this.state.pages.map(
                             page =>
                                 <div className="navbar-pages" key={page}
-                                     onClick={this.props.changePage()}
+                                     onClick={this.props.changePage}
                                 >
                                     {page}
                                 </div>

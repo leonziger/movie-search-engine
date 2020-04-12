@@ -19,16 +19,21 @@ class App extends React.Component {
     }
 
     async fetchMovies(page) {
+        this.setState({
+            isLoading: true
+        });
         const url = "https://api.themoviedb.org/3/discover/movie?api_key=ee0f05a0f4bb56e4353f24db8f4f30ef&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page="+page;
-        const movies = await axios.get(
-            url
-        );
-        const films = movies.data.results;
+        const movies = await axios.get(url)
+            .then(films => {
+                this.setState({
+                    isLoading: false
+                });
+                return films.data.results;
+            });
 
         this.setState({
-            movies: films
+            movies: movies
         });
-        console.log('this.state.movies',this.state.movies);
     }
 
     changePage = (e) => {

@@ -9,9 +9,11 @@
 }
 .navbar-pages {
     color: #fff;
-    padding: 5px;
+    padding: 5px 10px;
     text-decoration: none;
+    border: 1px solid transparent;
 }
 .navbar-pages:hover {
-    text-decoration: underline;
+    cursor: pointer;
+    border: 1px solid white;
 }
