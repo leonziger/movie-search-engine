@@ -6,28 +6,30 @@ import MovieList from './components/MovieList/MovieList';
 import Footer from './components/Footer/Footer';
 import axios from "axios";
 
-class App extends React.Component {
+class App extends React.PureComponent {
     constructor() {
         super();
 
         this.state = {
-            movieList_showPage: 1,
+            firstLoad: true,
+            movieList_showPage: 10,
             movies: []
         }
-
-        this.fetchMovies(this.state.movieList_showPage);
     }
 
     async fetchMovies(page) {
-        this.setState({
-            isLoading: true
-        });
-        const url = "https://api.themoviedb.org/3/discover/movie?api_key=ee0f05a0f4bb56e4353f24db8f4f30ef&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page="+page;
-        const movies = await axios.get(url)
+        const url = "https://api.themoviedb.org/3/discover/movie";
+        const movies = await axios.get(url, {
+            params: {
+                'api_key': 'ee0f05a0f4bb56e4353f24db8f4f30ef',
+                'language': 'ru-RU',
+                'sort_by': 'popularity.desc',
+                'include_adult': 'false',
+                'include_video': 'false',
+                'page': page
+            }
+        })
             .then(films => {
-                this.setState({
-                    isLoading: false
-                });
                 return films.data.results;
             });
 
@@ -38,20 +40,28 @@ class App extends React.Component {
 
     changePage = (e) => {
         e.preventDefault();
-        const updateShowPage = Number(e.target.innerHTML);
-        console.log(updateShowPage);
+        const currentPage = Number(e.target.innerHTML);
+        console.log(currentPage);
         this.setState({
-            movieList_showPage: updateShowPage
+            firstLoad: false,
+            movieList_showPage: currentPage
         });
-
+        console.log('first load', this.state.firstLoad);
         this.fetchMovies(this.state.movieList_showPage);
+    }
+
+    componentDidMount() {
+        if (this.state.firstLoad) {
+            console.log('first load', this.state.firstLoad);
+            this.fetchMovies(this.state.movieList_showPage);
+        }
     }
 
     render() {
         return (
             <div>
                 <Header changePage={this.changePage}/>
-                <MovieList movies={this.state.movies}/>
+                 <MovieList movies={this.state.movies}/>
                 <Footer/>
             </div>
         );
