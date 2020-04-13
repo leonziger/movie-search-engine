@@ -24,6 +24,18 @@
     border: 1px solid white;
 }
 
+.navbar-button:hover {
+    cursor: pointer;
+    background: yellow;
+    outline: none;
+}
+
+.navbar-buttons {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
 @media(max-width:480px) {
     .navbar-title {
         display: none;

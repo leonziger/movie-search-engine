@@ -13,15 +13,13 @@ class App extends React.Component {
         super();
 
         this.state = {
-            movieList_startPage: 600,
+            startPage: 1,
+            pages : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             movies: []
         }
     }
 
     async fetchMovies(page) {
-        this.setState({
-            isLoading: true
-        });
 
         const movies = await axios
             .get(url, {
@@ -34,17 +32,13 @@ class App extends React.Component {
                     'page': page
                 }
             })
-            .then(films => {
-                this.setState({ isLoading: false });
-                return films.data.results;
-            })
+            .then(films => films.data.results )
             .catch(error => this.setState({ error: true }));
 
         this.setState({
             movies: movies
         });
     }
-
 
     changePage = (e) => {
         e.preventDefault();
@@ -61,21 +55,46 @@ class App extends React.Component {
 
         this.fetchMovies(currentPage);
         this.setState({
-            movieList_startPage: currentPage
+            startPage: currentPage
         });
+    };
 
-    }
+    updatePrevPagesRange = () => {
+        const firstPage = this.state.pages[0];
+        if ( firstPage >1 ) {
+            const prevPagesRange = this.state.pages.map(page => page - 10);
+
+            this.fetchMovies(prevPagesRange[0]);
+            this.setState({
+                pages : prevPagesRange
+            });
+        }
+    };
+
+    updateNextPagesRange = () => {
+        const nextPagesRange = this.state.pages.map(page => page + 10);
+
+        this.fetchMovies(nextPagesRange[0]);
+        this.setState({
+            pages : nextPagesRange
+        });
+    };
 
     componentDidMount() {
-        this.fetchMovies(this.state.movieList_startPage);
-    }
+        this.fetchMovies(this.state.startPage);
+    };
 
     render() {
-        const infoMessage = this.state.error ? <p className="App-error">Movies can't be loaded from {this.state.movieList_startPage}s page</p> : 'Loading...';
+        const infoMessage = this.state.error ? <p className="App-error">Movies can't be loaded on this page</p> : 'Loading...';
 
         return (
             <div>
-                <Header changePage={this.changePage}/>
+                <Header
+                    pages={this.state.pages}
+                    changePage={this.changePage}
+                    updatePrevPagesRange={this.updatePrevPagesRange}
+                    updateNextPagesRange={this.updateNextPagesRange}
+                />
                 {this.state.movies ? <MovieList movies={this.state.movies}/> : infoMessage}
                 <Footer/>
             </div>
