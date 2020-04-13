@@ -6,7 +6,10 @@ import MovieList from './components/MovieList/MovieList';
 import Footer from './components/Footer/Footer';
 import axios from "axios";
 
-const url = "https://api.themoviedb.org/3/discover/movie";
+const api_key = 'ee0f05a0f4bb56e4353f24db8f4f30ef';
+const url_discover = "https://api.themoviedb.org/3/discover/movie";
+//const url_search = "https://api.themoviedb.org/3/search/movie";
+//https://api.themoviedb.org/3/search/movie?api_key=ee0f05a0f4bb56e4353f24db8f4f30ef&language=en-US&page=1&include_adult=false&query=Batman
 
 class App extends React.Component {
     constructor() {
@@ -22,13 +25,15 @@ class App extends React.Component {
     async fetchMovies(page) {
 
         const movies = await axios
-            .get(url, {
+            .get(url_discover, {
                 params: {
-                    'api_key': 'ee0f05a0f4bb56e4353f24db8f4f30ef',
+                    'api_key': api_key,
                     'language': 'ru-RU',
                     'sort_by': 'popularity.desc',
                     'include_adult': 'false',
                     'include_video': 'false',
+                    'primary_release_date.gte': '1900-01-01',
+                    'primary_release_date.lte': '2020-01-01',
                     'page': page
                 }
             })
@@ -38,6 +43,11 @@ class App extends React.Component {
         this.setState({
             movies: movies
         });
+
+        // const firstPage = document.querySelector('div.navbar-page:nth-child(2)');
+        // if( firstPage ) {
+        //     firstPage.classList.add('navbar-page_active');
+        // }
     }
 
     changePage = (e) => {
