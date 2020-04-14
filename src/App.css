@@ -24,6 +24,16 @@
   color: white;
 }
 
+.App-content {
+  background-image: url(mainbg.jpg);
+  min-height: 500px;
+}
+.App-content_clean {
+  background: none;
+  min-height: 100px;
+}
+
+
 .App-link {
   color: #61dafb;
 }

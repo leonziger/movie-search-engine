@@ -7,7 +7,7 @@ class MovieNavBar extends React.Component {
         return (
 
             <div>
-                <div className="movie-search-result">Результаты поиска "{this.props.query}". Найдено {this.props.totalResults} результатов </div>
+                <div className="movie-search-result">По запросу "{this.props.query}" найдено {this.props.totalResults} результатов </div>
                 <div className="movie-navbar">
 
                         <span className="movie-navbar-title">Страницы:</span> {

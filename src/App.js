@@ -7,7 +7,6 @@ import Footer from './components/Footer/Footer';
 import axios from "axios";
 
 const api_key = 'ee0f05a0f4bb56e4353f24db8f4f30ef';
-const url_discover = "https://api.themoviedb.org/3/discover/movie";
 const url_search = "https://api.themoviedb.org/3/search/movie";
 
 class App extends React.Component {
@@ -67,47 +66,12 @@ class App extends React.Component {
 
     }
 
-    async fetchMovies(page) {
-
-        const movies = await axios
-            .get(url_discover, {
-                params: {
-                    'api_key': api_key,
-                    'language': 'ru-RU',
-                    'sort_by': 'popularity.desc',
-                    'include_adult': 'false',
-                    'include_video': 'false',
-                    'primary_release_date.gte': '1900-01-01',
-                    'primary_release_date.lte': '2020-01-01',
-                    'page': page
-                }
-            })
-            .then(films => films.data )
-            .catch(error => this.setState({ error: true }));
-
-        console.log(movies.page);
-        console.log(movies.total_pages);
-        console.log(movies.results);
-
-        this.setState({
-            startPage: movies.pages,
-            totalPages: movies.total_pages,
-            movies: movies.results
-        });
-
-        // const firstPage = document.querySelector('div.navbar-page:nth-child(2)');
-        // if( firstPage ) {
-        //     firstPage.classList.add('navbar-page_active');
-        // }
-    }
-
     changePage = (e) => {
         e.preventDefault();
 
         const clickedPage = e.target;
         console.log(clickedPage);
         const activePage = document.querySelector('.movie-navbar-page_active');
-
 
         if( clickedPage ) {
             activePage && activePage.classList.remove('movie-navbar-page_active');
@@ -116,36 +80,10 @@ class App extends React.Component {
 
         const currentPage = Number(clickedPage.innerText);
 
-        //this.fetchMovies(currentPage);
         this.searchMovies(this.state.query, currentPage, this.state.totalPages, this.state.totalResults, this.state.movies);
         this.setState({
             startPage: currentPage
         });
-    };
-
-    updatePrevPagesRange = () => {
-        const firstPage = this.state.pages[0];
-        if ( firstPage >1 ) {
-            const prevPagesRange = this.state.pages.map(page => page - 10);
-
-            this.fetchMovies(prevPagesRange[0]);
-            this.setState({
-                pages : prevPagesRange
-            });
-        }
-    };
-
-    updateNextPagesRange = () => {
-        const nextPagesRange = this.state.pages.map(page => page + 10);
-
-        this.fetchMovies(nextPagesRange[0]);
-        this.setState({
-            pages : nextPagesRange
-        });
-    };
-
-    componentDidMount() {
-        //this.fetchMovies(this.state.startPage);
     };
 
     render() {
@@ -157,15 +95,17 @@ class App extends React.Component {
                     formSubmitHandler = {this.formSubmitHandler}
                     submitForm = {this.submitForm}
                 />
-                {this.state.query ? <MovieList
-                                        query= {this.state.query}
-                                        currentPage= {this.state.startPage}
-                                        totalPages = {this.state.totalPages}
-                                        totalResults = {this.state.totalResults}
-                                        pages={this.state.pages}
-                                        movies={this.state.movies}
-                                        changePage={this.changePage}
-                                        /> : infoMessage}
+                <div className="App-content">
+                    {this.state.query ? <MovieList
+                                            query= {this.state.query}
+                                            currentPage= {this.state.startPage}
+                                            totalPages = {this.state.totalPages}
+                                            totalResults = {this.state.totalResults}
+                                            pages={this.state.pages}
+                                            movies={this.state.movies}
+                                            changePage={this.changePage}
+                                            /> : infoMessage}
+                </div>
                 <Footer/>
             </div>
         );
