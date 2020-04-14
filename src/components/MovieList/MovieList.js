@@ -4,11 +4,9 @@ import MovieItem from "./MovieItem/MovieItem";
 
 class MovieList extends React.Component {
 
-    componentDidMount() {
-        console.log('MovieList = ',this.props);
-    }
-
     render() {
+        console.log('MovieList = ',this.props);
+
         return (
             <div className="container">
                 {this.props.totalResults > 0

@@ -95,7 +95,7 @@ class App extends React.Component {
                     formSubmitHandler = {this.formSubmitHandler}
                     submitForm = {this.submitForm}
                 />
-                <div className="App-content">
+                 <div className={ this.state.query.length === 0 ? "App-content" : "App-content_clean" }>
                     {this.state.query ? <MovieList
                                             query= {this.state.query}
                                             currentPage= {this.state.startPage}

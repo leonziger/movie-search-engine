@@ -122,11 +122,13 @@ class MovieItem extends React.Component {
         return (
             <div className="col-lg-3 col-md-4 col-sm-6 card">
 
-                <img
-                    className="card-img-top"
-                    alt=""
-                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${this.props.movie.backdrop_path || this.props.movie.poster_path}`}
-                />
+                <div className="card-img">
+                    <img
+                        className="card-img-top"
+                        alt=""
+                        src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${this.props.movie.backdrop_path || this.props.movie.poster_path}`}
+                    />
+                </div>
                 <div className="card-body">
                     <div className="card-title">{this.props.movie.title}
                     { isNaN(this.props.movie.release_date) ? " (" + new Date(this.props.movie.release_date).getFullYear()+")" : '' }
