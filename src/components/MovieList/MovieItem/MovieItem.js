@@ -34,7 +34,7 @@ class MovieItem extends React.Component {
                 {
                     "id": 99,
                     "name": "Documentary",
-                    "ru_name": "Документальный ф-м"
+                    "ru_name": "Документальный"
                 },
                 {
                     "id": 18,
@@ -44,7 +44,7 @@ class MovieItem extends React.Component {
                 {
                     "id": 10751,
                     "name": "Family",
-                    "ru_name": "Семейный ф-м"
+                    "ru_name": "Семейный"
                 },
                 {
                     "id": 14,
@@ -54,7 +54,7 @@ class MovieItem extends React.Component {
                 {
                     "id": 36,
                     "name": "History",
-                    "ru_name": "Исторический ф-м"
+                    "ru_name": "Исторический"
                 },
                 {
                     "id": 27,
@@ -64,7 +64,7 @@ class MovieItem extends React.Component {
                 {
                     "id": 10402,
                     "name": "Music",
-                    "ru_name": "Музыкальный ф-м"
+                    "ru_name": "Музыкальный"
                 },
                 {
                     "id": 9648,
@@ -74,7 +74,7 @@ class MovieItem extends React.Component {
                 {
                     "id": 10749,
                     "name": "Romance",
-                    "ru_name": "Романтический ф-м"
+                    "ru_name": "Романтический"
                 },
                 {
                     "id": 878,
@@ -94,7 +94,7 @@ class MovieItem extends React.Component {
                 {
                     "id": 10752,
                     "name": "War",
-                    "ru_name": "Военный ф-м"
+                    "ru_name": "Военный"
                 },
                 {
                     "id": 37,
@@ -120,7 +120,7 @@ class MovieItem extends React.Component {
 
     render() {
         return (
-            <div className="col-md-4 col-sm-6 card">
+            <div className="col-lg-3 col-md-4 col-sm-6 card">
 
                 <img
                     className="card-img-top"
@@ -128,11 +128,10 @@ class MovieItem extends React.Component {
                     src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${this.props.movie.backdrop_path || this.props.movie.poster_path}`}
                 />
                 <div className="card-body">
-                    <div className="card-title">{this.props.movie.title} ({new Date(this.props.movie.release_date).getFullYear()})
+                    <div className="card-title">{this.props.movie.title}
+                    { isNaN(this.props.movie.release_date) ? " (" + new Date(this.props.movie.release_date).getFullYear()+")" : '' }
                     </div>
-                    <div className="card-genres"><b>Жанр:</b> {
-                        this.props.movie.genre_ids === false ? '' : this.decodeGenres(this.props.movie.genre_ids)
-                    }</div>
+                     {this.props.movie.genre_ids.length>0 ? <div className="card-genres"><b>Жанр:&nbsp;</b>{this.decodeGenres(this.props.movie.genre_ids)}</div> : ''}
                     <div className="card-overview">{this.props.movie.overview}</div>
                 </div>
             </div>

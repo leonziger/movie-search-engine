@@ -1,6 +1,6 @@
 import React from "react";
 import './Header.css';
-import Navbar from './../Navbar/Navbar';
+import SearchForm from "../SearchForm/SearchForm";
 
 class Header extends React.Component {
 
@@ -8,12 +8,10 @@ class Header extends React.Component {
         return (
             <div className="header">
                 <div className="container">
-                    <div className="header-title">Movie Search Engine</div>
-                    <Navbar
-                        pages={this.props.pages}
-                        changePage={this.props.changePage}
-                        updatePrevPagesRange={this.props.updatePrevPagesRange}
-                        updateNextPagesRange={this.props.updateNextPagesRange}
+                    <a className="header-title" href="/">Movie Search Engine</a>
+                    <SearchForm
+                        formSubmitHandler={this.props.formSubmitHandler}
+                        submitForm={this.props.submitForm}
                     />
                 </div>
             </div>
