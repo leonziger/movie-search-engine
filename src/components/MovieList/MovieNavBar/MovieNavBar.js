@@ -4,6 +4,8 @@ import './MovieNavBar.css';
 class MovieNavBar extends React.Component {
 
     render() {
+        console.log('MovieNavBar = ',this.props);
+
         return (
 
             <div>

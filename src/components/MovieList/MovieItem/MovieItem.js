@@ -119,6 +119,7 @@ class MovieItem extends React.Component {
     };
 
     render() {
+
         return (
             <div className="col-lg-3 col-md-4 col-sm-6 card">
 
@@ -131,9 +132,9 @@ class MovieItem extends React.Component {
                 </div>
                 <div className="card-body">
                     <div className="card-title">{this.props.movie.title}
-                    { isNaN(this.props.movie.release_date) ? " (" + new Date(this.props.movie.release_date).getFullYear()+")" : '' }
+                        { isNaN(this.props.movie.release_date) ? " (" + new Date(this.props.movie.release_date).getFullYear()+")" : '' }
                     </div>
-                     {this.props.movie.genre_ids.length>0 ? <div className="card-genres"><b>Жанр:&nbsp;</b>{this.decodeGenres(this.props.movie.genre_ids)}</div> : ''}
+                    {this.props.movie.genre_ids.length>0 ? <div className="card-genres"><b>Жанр:&nbsp;</b>{this.decodeGenres(this.props.movie.genre_ids)}</div> : ''}
                     <div className="card-overview">{this.props.movie.overview}</div>
                 </div>
             </div>

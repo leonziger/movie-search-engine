@@ -5,6 +5,8 @@ import Header from './components/Header/Header';
 import MovieList from './components/MovieList/MovieList';
 import Footer from './components/Footer/Footer';
 import axios from "axios";
+import 'typeface-roboto';
+
 
 const api_key = 'ee0f05a0f4bb56e4353f24db8f4f30ef';
 const url_search = "https://api.themoviedb.org/3/search/movie";

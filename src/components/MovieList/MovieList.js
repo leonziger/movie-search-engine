@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieNavBar from "./MovieNavBar/MovieNavBar";
 import MovieItem from "./MovieItem/MovieItem";
+import Container from '@material-ui/core/Container';
 
 class MovieList extends React.Component {
 
@@ -8,7 +9,7 @@ class MovieList extends React.Component {
         console.log('MovieList = ',this.props);
 
         return (
-            <div className="container">
+            <Container>
                 {this.props.totalResults > 0
                     ? <div>
                         <MovieNavBar
@@ -28,7 +29,7 @@ class MovieList extends React.Component {
                     :
                     <div className="movie-search-nothing">По данному запросу ничего не найдено</div>
                 }
-            </div>
+            </Container>
         );
     }
 }
