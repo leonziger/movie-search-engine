@@ -11,7 +11,7 @@
 
 .movie-navbar{
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     padding: 10px;
     color: #fff;
     background-color: #000;
@@ -25,6 +25,11 @@
 .movie-navbar-title {
     padding: 5px;
 }
+.movie-navbar-pages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .movie-navbar-page {
     color: #fff;
     padding: 5px 10px;
@@ -42,13 +47,18 @@
     border: 1px solid white;
 }
 
+.movie-navbar-button {
+    align-self: center;
+    min-width: 110px;
+}
+
 .movie-navbar-button:hover {
     cursor: pointer;
     background: yellow;
     outline: none;
 }
 
-@media(max-width:480px) {
+@media(max-width:479px) {
     .movie-navbar-title {
         display: none;
     }
@@ -57,6 +67,5 @@
     }
     .movie-navbar-pages {
         text-align: center;
-        width: 40px;
     }
 }

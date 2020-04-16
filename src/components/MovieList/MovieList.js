@@ -6,22 +6,23 @@ import Container from '@material-ui/core/Container';
 class MovieList extends React.Component {
 
     render() {
-        console.log('MovieList = ',this.props);
 
         return (
             <Container>
-                {this.props.totalResults > 0
+                {this.props.data.state.totalResults > 0
                     ? <div>
                         <MovieNavBar
-                            query={this.props.query}
-                            currentPage={this.props.startPage}
-                            totalPages={this.props.totalPages}
-                            totalResults={this.props.totalResults}
-                            pages={this.props.pages}
-                            changePage={this.props.changePage}
+                            query={this.props.data.state.query}
+                            currentPage={this.props.data.state.startPage}
+                            totalPages={this.props.data.state.totalPages}
+                            totalResults={this.props.data.state.totalResults}
+                            pages={this.props.data.state.totalPages <= 10 ? this.props.data.state.pages : this.props.data.state.nextPages}
+                            changePage={this.props.data.changePage}
+                            updatePrevPagesRange = {this.props.data.updatePrevPagesRange}
+                            updateNextPagesRange = {this.props.data.updateNextPagesRange}
                         />
                         <div className="row">
-                            {this.props.movies.map(movie =>
+                            {this.props.data.state.movies.map(movie =>
                                 <MovieItem key={movie.id} movie={movie}/>
                             )}
                         </div>

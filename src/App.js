@@ -20,7 +20,8 @@ class App extends React.Component {
             startPage: 1,
             totalPages: 1,
             totalResults: 0,
-            pages : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            pages : [],
+            nextPages : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             movies: []
         }
     }
@@ -65,14 +66,12 @@ class App extends React.Component {
             pages: arr,
             movies: movies.results
         });
-
     }
 
     changePage = (e) => {
         e.preventDefault();
 
         const clickedPage = e.target;
-        console.log(clickedPage);
         const activePage = document.querySelector('.movie-navbar-page_active');
 
         if( clickedPage ) {
@@ -88,6 +87,45 @@ class App extends React.Component {
         });
     };
 
+    updatePrevPagesRange = () => {
+        const firstPage = this.state.pages[0];
+        if ( firstPage >1 ) {
+            const prevPagesRange = this.state.nextPages.map(page => page - 10);
+
+            //this.searchMovies(this.state.searchQuery, this.state.currentPage, this.state.totalPages, this.state.totalResults, this.state.movies);
+            this.setState({
+                nextPages : prevPagesRange
+            });
+        }
+    };
+
+    updateNextPagesRange = () => {
+        console.log(this.state);
+        let nextPagesRange, nextRange, modulo;
+        let difference = this.state.totalPages - (this.state.startPage + 10);
+
+        if (this.state.startPage < this.state.totalPages - 10)  {
+            if ( difference > 10) {
+                nextPagesRange = this.state.nextPages.map(page =>page+10);
+                nextRange= this.state.startPage + 10;
+            } else {
+                modulo = this.state.totalPages % 10;
+                nextPagesRange = [];
+                for (let i = 0; i < modulo; i++) {
+                    nextPagesRange[i] = this.state.startPage + 10 + i;
+                }
+                nextRange= this.state.startPage + 10 + difference;
+            }
+
+            this.searchMovies(this.state.query, nextPagesRange[0], this.state.totalPages, this.state.totalResults, this.state.movies)
+            this.setState({
+                startPage : nextRange,
+                nextPages : nextPagesRange
+            });
+        }
+
+    };
+
     render() {
         const infoMessage = this.state.error ? <p className="App-error">Movies can't be loaded on this page</p> : '';
 
@@ -99,13 +137,17 @@ class App extends React.Component {
                 />
                  <div className={ this.state.query.length === 0 ? "App-content" : "App-content_clean" }>
                     {this.state.query ? <MovieList
-                                            query= {this.state.query}
-                                            currentPage= {this.state.startPage}
-                                            totalPages = {this.state.totalPages}
-                                            totalResults = {this.state.totalResults}
-                                            pages={this.state.pages}
-                                            movies={this.state.movies}
-                                            changePage={this.changePage}
+                                            data = {this}
+                                            // query= {this.state.query}
+                                            // currentPage= {this.state.startPage}
+                                            // totalPages = {this.state.totalPages}
+                                            // totalResults = {this.state.totalResults}
+                                            // pages={this.state.pages}
+                                            // nextPages={this.state.nextPages}
+                                            // movies={this.state.movies}
+                                            // changePage={this.changePage}
+                                            // updatePrevPagesRange = {this.updatePrevPagesRange}
+                                            // updateNextPagesRange = {this.updateNextPagesRange}
                                             /> : infoMessage}
                 </div>
                 <Footer/>
