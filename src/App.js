@@ -27,6 +27,7 @@ class App extends React.Component {
             nextPages : [],
             movies: [] //найдено фильмов в API
         }
+
     }
 
     handleChange(e) {

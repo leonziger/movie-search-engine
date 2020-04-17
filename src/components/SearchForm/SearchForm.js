@@ -9,7 +9,7 @@ class SearchForm extends React.Component {
         console.log('SearchForm =', this.props);
 
         return (
-            <form className="search-form" onSubmit={this.props.formSubmitHandler}>
+            <form className="search-form" onSubmit={this.props.submitForm}>
                 <TextField
                     label="Поиск фильма"
                     name="film"
@@ -20,9 +20,7 @@ class SearchForm extends React.Component {
                     value={this.props.query}
                     onChange={this.props.handleChange}
                 />
-                <Button variant="contained" color="primary" onClick={this.props.submitForm}>
-                    Поиск
-                </Button>
+                <Button variant="contained" color="primary" >Поиск</Button>
             </form>
         )
     }
