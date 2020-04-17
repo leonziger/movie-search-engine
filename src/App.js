@@ -7,7 +7,6 @@ import Footer from './components/Footer/Footer';
 import axios from "axios";
 import 'typeface-roboto';
 
-
 const api_key = 'ee0f05a0f4bb56e4353f24db8f4f30ef';
 const url_search = "https://api.themoviedb.org/3/search/movie";
 
@@ -16,30 +15,52 @@ class App extends React.Component {
         super();
 
         this.state = {
-            query:'',
-            startPage: 1,
-            totalPages: 1,
-            totalResults: 0,
+            query:'battle', //поисковой запрос в API
+            startPage: 1, //страница, с которой начинает выполянться запрос
+            totalPages: 1,  //найдено страниц в API
+            totalResults: 0, //найдено результатов в API
+            step: 8,
+            totalShowPages: 1,
+            currentShowPage: 1,
+            showPages: [],
             pages : [],
-            nextPages : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            movies: []
+            nextPages : [],
+            movies: [] //найдено фильмов в API
         }
+    }
+
+    handleChange(e) {
+        console.log('handleChange =',e.target);
+        this.setState({query: e.target.value});
     }
 
     formSubmitHandler(e) {
-        e.preventDefault(); //should prevent submit, and continue below?
+        e.preventDefault();
         return false;
-    }
+    };
 
-    submitForm = (e) =>{
-        const query = e.target.closest('.search-form').children[0].value;
+    submitForm = () => {
+        console.log('submitForm =', this.state.query);
 
-        if (query.length >0) {
-            this.searchMovies(query, this.state.startPage, this.state.totalPages, this.state.totalResults, this.state.movies);
+        if (this.state.query.length >0) {
+            this.searchMovies(this.state.query, this.state.startPage, this.state.totalPages, this.state.totalResults, this.state.movies);
         }
     };
 
-    async searchMovies(searchQuery, currentPage, totalPages, totalResults, moviesArray) {
+    // submitForm = (e) =>{
+    //     const query = e.target.closest('.search-form').children[0];
+    //     console.log(query);
+    //
+
+    // };
+
+    async searchMovies(
+        searchQuery, // поисковый запрос в API
+        currentPage, //страница запроса в API
+        totalPages, //найдено страниц
+        totalResults, //найдено результатов
+        moviesArray //найденные, по запросу и номеру страницы, фильмы
+    ) {
         const movies = await axios
             .get(url_search, {
                 params: {
@@ -50,22 +71,51 @@ class App extends React.Component {
                     'query': searchQuery
                 }
             })
-            .then(films => films.data )
-            .catch(error => this.setState({ error: true }));
+            .then(films => films.data)
+            .catch(error => this.setState({error: true}));
 
-        const arr=[];
-        for (let i=1; i <= movies.total_pages; i++) {
-            arr.push(i);
+        const arr = [];
+        if (movies.total_pages <= this.state.step ) {
+            for (let i = 1; i <= movies.total_pages; i++) arr.push(i);
+        } else {
+            for (let i = 1; i <= this.state.step; i++) arr.push(i);
         }
+
+        const totalShowPages = Math.ceil(movies.total_pages / this.state.step) + 1;
 
         this.setState({
             query: searchQuery,
             startPage: currentPage,
             totalPages: movies.total_pages,
             totalResults: movies.total_results,
+            totalShowPages : totalShowPages,
             pages: arr,
+            nextPages : this.state.nextPages.length ===0 ? arr : this.state.nextPages,
             movies: movies.results
         });
+
+        let mass = [];
+        let modulo = movies.total_pages % this.state.step;
+        let nextPagesRange;
+
+        for (let i = 0; i<totalShowPages-2; i++) {
+            nextPagesRange = this.state.nextPages.map(page =>page + i*this.state.step);
+
+            mass.push({ page: i + 1, pages: nextPagesRange });
+        }
+
+        nextPagesRange = [];
+        for (let i = 0; i < modulo; i++) {
+            nextPagesRange.push(this.state.nextPages[i] + (modulo-1)*this.state.step);
+        }
+
+        mass.push({ page: totalShowPages-1, pages: nextPagesRange })
+
+
+        this.setState({
+            showPages: mass
+        });
+
     }
 
     changePage = (e) => {
@@ -100,29 +150,31 @@ class App extends React.Component {
     };
 
     updateNextPagesRange = () => {
-        console.log(this.state);
-        let nextPagesRange, nextRange, modulo;
-        let difference = this.state.totalPages - (this.state.startPage + 10);
+        console.log(this.state.showPages);
+        let currentShowPage = this.state.currentShowPage;
+        let totalShowPages = this.state.totalShowPages;
+        console.log('totalShowPages = ', totalShowPages);
+        console.log('currentShowPage = ', currentShowPage);
+        currentShowPage++;
+        let nextPagesRange;
 
-        if (this.state.startPage < this.state.totalPages - 10)  {
-            if ( difference > 10) {
-                nextPagesRange = this.state.nextPages.map(page =>page+10);
-                nextRange= this.state.startPage + 10;
-            } else {
-                modulo = this.state.totalPages % 10;
-                nextPagesRange = [];
-                for (let i = 0; i < modulo; i++) {
-                    nextPagesRange[i] = this.state.startPage + 10 + i;
-                }
-                nextRange= this.state.startPage + 10 + difference;
-            }
+        if (currentShowPage > 1 && currentShowPage < totalShowPages-1) {
+            nextPagesRange = this.state.nextPages.map(page => page + this.state.step);
 
-            this.searchMovies(this.state.query, nextPagesRange[0], this.state.totalPages, this.state.totalResults, this.state.movies)
+            console.log(this.state.nextPages);
+            console.log(nextPagesRange);
+
             this.setState({
-                startPage : nextRange,
-                nextPages : nextPagesRange
+                nextPages : nextPagesRange,
+                currentShowPage: currentShowPage
             });
+        } else {
+
         }
+
+
+
+        this.searchMovies(this.state.query, nextPagesRange[0], this.state.totalPages, this.state.totalResults, this.state.movies);
 
     };
 
@@ -132,23 +184,13 @@ class App extends React.Component {
         return (
             <div>
                 <Header
+                    query={this.state.query}
+                    handleChange = {this.handleChange}
                     formSubmitHandler = {this.formSubmitHandler}
                     submitForm = {this.submitForm}
                 />
                  <div className={ this.state.query.length === 0 ? "App-content" : "App-content_clean" }>
-                    {this.state.query ? <MovieList
-                                            data = {this}
-                                            // query= {this.state.query}
-                                            // currentPage= {this.state.startPage}
-                                            // totalPages = {this.state.totalPages}
-                                            // totalResults = {this.state.totalResults}
-                                            // pages={this.state.pages}
-                                            // nextPages={this.state.nextPages}
-                                            // movies={this.state.movies}
-                                            // changePage={this.changePage}
-                                            // updatePrevPagesRange = {this.updatePrevPagesRange}
-                                            // updateNextPagesRange = {this.updateNextPagesRange}
-                                            /> : infoMessage}
+                    {this.state.query ? <MovieList data = {this}/> : infoMessage}
                 </div>
                 <Footer/>
             </div>

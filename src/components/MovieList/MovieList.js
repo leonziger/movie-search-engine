@@ -16,7 +16,8 @@ class MovieList extends React.Component {
                             currentPage={this.props.data.state.startPage}
                             totalPages={this.props.data.state.totalPages}
                             totalResults={this.props.data.state.totalResults}
-                            pages={this.props.data.state.totalPages <= 10 ? this.props.data.state.pages : this.props.data.state.nextPages}
+                            step={this.props.data.state.step}
+                            pages={this.props.data.state.totalPages <= this.props.data.state.step ? this.props.data.state.pages : this.props.data.state.nextPages}
                             changePage={this.props.data.changePage}
                             updatePrevPagesRange = {this.props.data.updatePrevPagesRange}
                             updateNextPagesRange = {this.props.data.updateNextPagesRange}

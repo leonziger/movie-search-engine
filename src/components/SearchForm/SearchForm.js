@@ -1,21 +1,28 @@
 import React from "react";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import './SearchForm.css';
 
 class SearchForm extends React.Component {
 
     render() {
+        console.log('SearchForm =', this.props);
 
         return (
             <form className="search-form" onSubmit={this.props.formSubmitHandler}>
-
-                <input
-                    className="search-form__input"
-                    type="text"
+                <TextField
+                    label="Поиск фильма"
                     name="film"
-                    placeholder="Введите название фильма"
-                    value = "battle"
+                    color="primary"
+                    id="outlined-basic"
+                    variant="outlined"
+                    fullWidth={true}
+                    value={this.props.query}
+                    onChange={this.props.handleChange}
                 />
-                <button className="navbar-button search-button" onClick={this.props.submitForm}>Найти</button>
+                <Button variant="contained" color="primary" onClick={this.props.submitForm}>
+                    Поиск
+                </Button>
             </form>
         )
     }

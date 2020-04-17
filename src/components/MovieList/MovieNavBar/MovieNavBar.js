@@ -4,16 +4,14 @@ import './MovieNavBar.css';
 class MovieNavBar extends React.Component {
 
     render() {
-
         return (
-
             <div>
                 <div className="movie-search-result">По запросу "{this.props.query}" найдено {this.props.totalResults} результатов ({this.props.totalPages} страниц)</div>
                 <div className="movie-navbar">
 
                     {
-                        this.props.totalPages > 10 && this.props.currentPage > 10
-                        ? <div className="movie-navbar-buttons"><button className="movie-navbar-button prev-button" onClick={this.props.updatePrevPagesRange}>пред 10 стр.</button></div>
+                        this.props.totalPages > this.props.step && this.props.currentPage > this.props.step
+                        ? <div className="movie-navbar-buttons"><button className="movie-navbar-button prev-button" onClick={this.props.updatePrevPagesRange}>пред {this.props.step} стр.</button></div>
                         : <div className="movie-navbar-buttons"><div> Страницы: </div></div>
                     }
 
@@ -28,10 +26,10 @@ class MovieNavBar extends React.Component {
                         )}
                     </div>
                     {
-                        this.props.totalPages > 10
+                        this.props.totalPages > this.props.step
                             ?
                                 <div className="movie-navbar-buttons">
-                                    <button className="movie-navbar-button next-button" onClick={this.props.updateNextPagesRange}>след 10 стр.</button>
+                                    <button className="movie-navbar-button next-button" onClick={this.props.updateNextPagesRange}>след {this.props.step} стр.</button>
                                 </div>
                             : ''
                     }
