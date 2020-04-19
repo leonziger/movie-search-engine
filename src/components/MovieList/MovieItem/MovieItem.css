@@ -1,61 +1,12 @@
-.card {
-    padding: 10px 20px;
-    text-align: center;
-
-}
-.card-title {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1;
-    margin-bottom: 5px;
-    text-align: left;
-}
-.card-genres {
-    line-height: 1;
-    margin-bottom: 5px;
-    font-style: italic;
-}
-.card-img {
-    background-image: url("./../../../camera.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 320px;
-    max-width: 250px;
-}
-.card-img-top {
-    width: 100%;
-    height: 100%;
-}
-.card-body {
+.MuiCardContent-root {
     height: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: justify;
 }
-
-@media(max-width:767px) {
-    .card-img-top {
-        max-width: 200px;
-    }
-    .card-title {
-        text-align: center;
-    }
-}
 @media(max-width: 479px) {
-    .card {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 10px;
-    }
-    .card-body {
+    .MuiCardContent-root {
         height: auto;
-    }
-}
-@media(max-width: 575px) {
-    .card-img {
-        margin: 0 auto;
     }
 }
 

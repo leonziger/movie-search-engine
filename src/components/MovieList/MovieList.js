@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { MovieNavBar } from "./MovieNavBar";
 import { MovieItem  } from "./MovieItem";
 
@@ -7,18 +7,17 @@ export const MovieList = (props) => {
 
     return (
         <Container>
-
-            {props.data.state.totalResults > 0
+            {props.data.totalResults > 0
                 ? <div>
                     <MovieNavBar
-                        query={props.data.state.query}
-                        currentPage={props.data.state.startPage}
-                        totalPages={props.data.state.totalPages}
-                        totalResults={props.data.state.totalResults}
+                        query={props.data.query}
+                        currentPage={props.data.startPage}
+                        totalPages={props.data.totalPages}
+                        totalResults={props.data.totalResults}
                         changePage={props.data.changePage}
                     />
-                        <Grid container spacing={4}>
-                            {props.data.state.movies.map(movie =>
+                        <Grid container justify="center" spacing={4}>
+                            {props.data.movies.map(movie =>
                                 <Grid item lg={3} md={4} sm={6} key={movie.id}>
                                     <MovieItem key={movie.id} movie={movie}/>
                                 </Grid>
@@ -26,7 +25,9 @@ export const MovieList = (props) => {
                         </Grid>
                 </div>
                 :
-                <div className="movie-search-nothing">По данному запросу ничего не найдено</div>
+                <Typography align="center" color="error" variant="subtitle1" justify="center" component="p">
+                    По данному запросу ничего не найдено
+                </Typography>
             }
         </Container>
     );

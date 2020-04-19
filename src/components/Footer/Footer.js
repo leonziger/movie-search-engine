@@ -1,11 +1,16 @@
 import React from "react";
+import { Container, Link, Paper, Typography } from '@material-ui/core';
 import './Footer.css';
 
 export function Footer() {
 
     return(
-        <div className="footer">
-            <div className="container footer-copy">Movie Search Engine. Copyright 2020.</div>
-        </div>
+        <Paper elevation={0}>
+            <Container>
+                <Typography variant="h6" component="h1" align="center">
+                    <Link color="primary" underline="none" href="/">Movie Search Engine. Copyright 2020</Link>
+                </Typography>
+            </Container>
+        </Paper>
     );
 };

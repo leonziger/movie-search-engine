@@ -1,19 +1,19 @@
 import React from "react";
-import { Container, Paper, Typography } from '@material-ui/core';
+import { Container, Link, Paper, Typography } from '@material-ui/core';
 import { SearchForm } from '../SearchForm';
 import './Header.css';
 
 export const Header = (props) => {
 
     return (
-        <Paper position="fixed">
+        <Paper elevation={0}>
             <Container>
-                <Typography variant="h1" component="h2">
-                    <a className="header-title" href="/">Movie Search Engine</a>
+                <Typography variant="h6" component="h1" color="textPrimary" align="center">
+                    <Link color="primary" underline="none" href="/">Movie Search Engine</Link>
                 </Typography>
                 <SearchForm
                     query={props.query}
-                    page={props.page}
+                    currentPage={props.currentPage}
                     totalPages={props.totalPages}
                     onChange = {props.handleChange}
                     formSubmitHandler={props.formSubmitHandler}
