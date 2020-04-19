@@ -1,43 +1,19 @@
 import React from "react";
+import Pagination from '@material-ui/lab/Pagination';
 import './MovieNavBar.css';
 
-class MovieNavBar extends React.Component {
+export const MovieNavBar= (props) => {
 
-    render() {
-        return (
-            <div>
-                <div className="movie-search-result">По запросу "{this.props.query}" найдено {this.props.totalResults} результатов ({this.props.totalPages} страниц)</div>
-                <div className="movie-navbar">
-
-                    {
-                        this.props.totalPages > this.props.step && this.props.currentPage > this.props.step
-                        ? <div className="movie-navbar-buttons"><button className="movie-navbar-button prev-button" onClick={this.props.updatePrevPagesRange}>пред {this.props.step} стр.</button></div>
-                        : <div className="movie-navbar-buttons"><div> Страницы: </div></div>
-                    }
-
-                    <div className="movie-navbar-pages">{
-                        this.props.pages.map(
-                            page =>
-                                page === this.props.currentPage
-                                ?
-                                    <div className="movie-navbar-page movie-navbar-page_active" key={page}>{page}</div>
-                                :
-                                    <div className="movie-navbar-page" key={page} onClick={this.props.changePage}>{page}</div>
-                        )}
-                    </div>
-                    {
-                        this.props.totalPages > this.props.step
-                            ?
-                                <div className="movie-navbar-buttons">
-                                    <button className="movie-navbar-button next-button" onClick={this.props.updateNextPagesRange}>след {this.props.step} стр.</button>
-                                </div>
-                            : ''
-                    }
-                </div>
-
-            </div>
-        )
-    }
-}
-
-export default MovieNavBar;
+    return(
+        <div className="movie-search__container">
+            <div className="movie-search-result">По запросу "{props.query}" найдено {props.totalResults} результатов</div>
+            <Pagination
+                page={props.page}
+                count={props.totalPages}
+                variant="outlined"
+                shape="rounded"
+                onChange={props.changePage}
+            />
+        </div>
+    );
+};

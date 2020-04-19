@@ -1,29 +1,30 @@
 import React from "react";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Grid, Button, TextField } from '@material-ui/core';
 import './SearchForm.css';
 
-class SearchForm extends React.Component {
+export const SearchForm  = (props) => {
 
-    render() {
-        console.log('SearchForm =', this.props);
-
-        return (
-            <form className="search-form" onSubmit={this.props.submitForm}>
-                <TextField
-                    label="Поиск фильма"
-                    name="film"
-                    color="primary"
-                    id="outlined-basic"
-                    variant="outlined"
-                    fullWidth={true}
-                    value={this.props.query}
-                    onChange={this.props.handleChange}
-                />
-                <Button variant="contained" color="primary" >Поиск</Button>
+    return (
+        <Grid container spacing={1}>
+            <form className="search-form">
+                <Grid item lg={11}>
+                    <TextField
+                        InputProps = {{className : 'whiteBg'}}
+                        label="Поиск фильма"
+                        name="film"
+                        color="primary"
+                        id="outlined-basic"
+                        variant="outlined"
+                        fullWidth
+                        size="medium"
+                        value={props.query}
+                        onChange={props.onChange}
+                    />
+                </Grid>
+                <Grid item lg={1}>
+                    <Button variant="contained" color="primary" onClick={props.submitForm}>Поиск</Button>
+                </Grid>
             </form>
-        )
-    }
-}
-
-export default SearchForm
+        </Grid>
+    );
+};

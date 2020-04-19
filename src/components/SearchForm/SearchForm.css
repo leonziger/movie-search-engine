@@ -6,12 +6,6 @@
     padding: 20px;
 }
 
-.search-form__input {
-    width: 100%;
-    margin-right: 10px;
-    padding: 7px;
-}
-
-.search-form__input:focus {
-    outline: none;
+.whiteBg {
+    background: #fff;
 }
