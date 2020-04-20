@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import * as moviesApi from './api/movies';
 import 'typeface-roboto';
 import { Header } from './components/Header';
@@ -8,12 +9,13 @@ import './App.css';
 
 const App = () => {
 
-        const [ query, setQuery ] = useState('star');
-        const [ currentPage, setCurrentPage ] = useState(1);
-        const [ totalPages, setTotalPages ] = useState(0);
-        const [ totalResults, setTotalResults ] = useState(0);
-        const [ movies, setMovies ] = useState([]);
-        const [ error, setError ] = useState(false);
+    const [ query, setQuery ] = useState('star');
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const [ totalPages, setTotalPages ] = useState(0);
+    const [ totalResults, setTotalResults ] = useState(0);
+    const [ movies, setMovies ] = useState([]);
+    const [ genres, setGenres ] = useState([]);
+    const [ error, setError ] = useState(false);
 
     const handleChange = (event) => {
         setQuery(event.target.value);
@@ -25,6 +27,7 @@ const App = () => {
     };
 
     const submitForm = () => {
+        searchGenres();
         if (query.length >0) {
             searchMovies(query);
         }
@@ -49,8 +52,21 @@ const App = () => {
 
     };
 
-    const changePage = (event, page) => {
+    const searchGenres = () => {
+        axios.get('https://api.themoviedb.org/3/genre/movie/list?', {
+            params: {
+                'api_key': 'ee0f05a0f4bb56e4353f24db8f4f30ef',
+                'language': 'ru-RU'
+            }
+        })
+            .then(response => {
+                setGenres(response.data.genres);
+            })
+            .catch(error => setError(true));
 
+    };
+
+    const changePage = (event, page) => {
         searchMovies({ page });
     };
 
@@ -75,6 +91,7 @@ const App = () => {
                                                 totalPages,
                                                 totalResults,
                                                 movies,
+                                                genres,
                                                 error,
                                                 changePage
                                             }}

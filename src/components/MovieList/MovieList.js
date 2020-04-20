@@ -19,7 +19,7 @@ export const MovieList = (props) => {
                         <Grid container justify="center" spacing={4}>
                             {props.data.movies.map(movie =>
                                 <Grid item lg={3} md={4} sm={6} key={movie.id}>
-                                    <MovieItem key={movie.id} movie={movie}/>
+                                    <MovieItem key={movie.id} movie={movie} genres={props.data.genres}/>
                                 </Grid>
                             )}
                         </Grid>

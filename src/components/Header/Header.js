@@ -4,9 +4,8 @@ import { SearchForm } from '../SearchForm';
 import './Header.css';
 
 export const Header = (props) => {
-
     return (
-        <Paper elevation={0}>
+        <Paper elevation={1}>
             <Container>
                 <Typography variant="h6" component="h1" color="textPrimary" align="center">
                     <Link color="primary" underline="none" href="/">Movie Search Engine</Link>

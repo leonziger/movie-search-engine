@@ -4,7 +4,6 @@ import Pagination from '@material-ui/lab/Pagination';
 import './MovieNavBar.css';
 
 export const MovieNavBar= (props) => {
-
     return(
         <Container>
             <Typography variant="body2" color="textPrimary" align="center">

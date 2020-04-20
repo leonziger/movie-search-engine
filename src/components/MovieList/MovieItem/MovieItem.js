@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardContent, CardMedia, Typography} from '@material-ui/core';
-import { genres} from "../../../api/movies";
 import './MovieItem.css';
 
 export const MovieItem = (props) => {
@@ -27,9 +26,9 @@ export const MovieItem = (props) => {
     const decodeGenres = (array) => {
         let items = '', cuttedItems = '';
         array.forEach((item) => {
-            genres.forEach((element)=>{
+            props.genres.forEach((element)=>{
                 if (element.id === item ) {
-                    cuttedItems += element.ru_name.toLowerCase() + ', ';
+                    cuttedItems += element.name.toLowerCase() + ', ';
                 }
             });
         });
@@ -59,7 +58,7 @@ export const MovieItem = (props) => {
                             ''
                     }
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.movie.overview}
+                        {props.movie.overview.length > 0 ? props.movie.overview : "К сожалению, краткое описание фильма на русском языке, отсутствует."}
                     </Typography>
                 </CardContent>
             </CardActionArea>

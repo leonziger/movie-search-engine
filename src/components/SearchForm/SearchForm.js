@@ -3,7 +3,6 @@ import { Grid, Button, TextField } from '@material-ui/core';
 import './SearchForm.css';
 
 export const SearchForm  = (props) => {
-
     return (
         <Grid container spacing={1}>
             <form className="search-form">

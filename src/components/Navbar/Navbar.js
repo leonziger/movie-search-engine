@@ -2,7 +2,6 @@ import React from "react";
 import './Navbar.css';
 
 export const Navbar = (props) => {
-
     return (
         <div className="container">
             <div className="navbar">
@@ -14,7 +13,6 @@ export const Navbar = (props) => {
                             >
                                 {page}
                             </div>
-
                     )}
             </div>
         </div>

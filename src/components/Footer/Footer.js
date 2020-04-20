@@ -3,7 +3,6 @@ import { Container, Link, Paper, Typography } from '@material-ui/core';
 import './Footer.css';
 
 export function Footer() {
-
     return(
         <Paper elevation={0}>
             <Container>
