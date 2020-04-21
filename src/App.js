@@ -15,6 +15,7 @@ const App = () => {
     const [ totalResults, setTotalResults ] = useState(0);
     const [ movies, setMovies ] = useState([]);
     const [ genres, setGenres ] = useState([]);
+    const [ movie, setMovie ] = useState({});
     const [ error, setError ] = useState(false);
 
     const handleChange = (event) => {
@@ -66,6 +67,25 @@ const App = () => {
 
     };
 
+    const showMovie = (event) => {
+        event.preventDefault();
+        const movie_id = event.target.closest('.cardWrapper').getAttribute('href');
+        const url = 'https://api.themoviedb.org/3/movie/' + movie_id + '?';
+
+        if (url.length) {
+            axios.get(url, {
+                params: {
+                    'api_key': 'ee0f05a0f4bb56e4353f24db8f4f30ef',
+                    'language': 'ru-RU'
+                }
+            })
+                .then(response => {
+                    setMovie(response.data);
+                })
+                .catch(error => setError(true));
+        }
+    };
+
     const changePage = (event, page) => {
         searchMovies({ page });
     };
@@ -93,7 +113,8 @@ const App = () => {
                                                 movies,
                                                 genres,
                                                 error,
-                                                changePage
+                                                changePage,
+                                                showMovie
                                             }}
                             />
                         :
