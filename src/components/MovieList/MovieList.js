@@ -4,7 +4,6 @@ import { MovieNavBar } from "./MovieNavBar";
 import { MovieItem  } from "./MovieItem";
 
 export const MovieList = (props) => {
-
   return (
     <Container>
       {props.data.totalResults > 0
@@ -16,6 +15,7 @@ export const MovieList = (props) => {
               totalResults={props.data.totalResults}
               changePage={props.data.changePage}
             />
+
             <Grid container spacing={4}>
               {props.data.movies.map(movie =>
                 <Grid item lg={3} md={4} sm={6} key={movie.id}>
@@ -23,6 +23,7 @@ export const MovieList = (props) => {
                 </Grid>
               )}
             </Grid>
+
           </div>
         :
           <Typography align="center" color="error" variant="subtitle1" justify="center" component="p">

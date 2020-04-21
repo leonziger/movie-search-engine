@@ -9,11 +9,12 @@ export const Header = (props) => {
         <Typography variant="h6" component="h1" color="textPrimary" align="center">
           <Link color="primary" underline="none" href="/">Movie Search Engine</Link>
         </Typography>
+
         <SearchForm
           query={props.query}
           currentPage={props.currentPage}
           totalPages={props.totalPages}
-          onChange = {props.handleChange}
+          onChange={props.handleChange}
           formSubmitHandler={props.formSubmitHandler}
           submitForm={props.submitForm}
         />

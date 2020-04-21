@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { Container, Link, Paper, Typography } from '@material-ui/core';
 
 export function Footer() {
-  return(
+  return (
     <Paper elevation={0}>
       <Container>
         <Typography variant="h6" component="h1" align="center">

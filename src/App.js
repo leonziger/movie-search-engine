@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import * as moviesApi from './api/movies';
 import 'typeface-roboto';
+import * as moviesApi from './api/movies';
 import { Header } from './components/Header';
 import { MovieList } from './components/MovieList';
 import { Footer } from './components/Footer';
@@ -75,10 +75,11 @@ const App = () => {
         query={query}
         currentPage={currentPage}
         totalPages={totalPages}
-        handleChange = {handleChange}
-        formSubmitHandler = {formSubmitHandler}
-        submitForm = {submitForm}
+        handleChange={handleChange}
+        formSubmitHandler={formSubmitHandler}
+        submitForm={submitForm}
       />
+
      <div className={ query.length === 0 ? "App-content" : "App-content_clean" }>
       {query
         ?

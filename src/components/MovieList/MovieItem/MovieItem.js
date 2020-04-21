@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardContent, CardMedia, Link, Typography} from '@material-ui/core';
 import './MovieItem.css';
 
-export const MovieItem = (props) => {
-  const useStyles = makeStyles({
-    root: {
-      maxWidth: 350,
-      marginBottom: '20px'
-    },
-    media: {
-      backgroundImage: 'url(../../../camera.png)',
-      backgroundSize: 'contain',
-      height: '320px',
-      maxWidth: '250px',
-      margin: '0 auto'
-    },
-  });
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 350,
+    marginBottom: '20px'
+  },
+  media: {
+    backgroundImage: 'url(../../../camera.png)',
+    backgroundSize: 'contain',
+    height: '320px',
+    maxWidth: '250px',
+    margin: '0 auto'
+  },
+});
 
+export const MovieItem = (props) => {
   const classes = useStyles();
 
   const decodeGenres = (array) => {
@@ -43,10 +43,12 @@ export const MovieItem = (props) => {
             image={props.movie.backdrop_path || props.movie.poster_path}
           />
           <CardContent>
+
             <Typography gutterBottom variant="h5" color="textPrimary" component="h2">
               {props.movie.title}
               { isNaN(props.movie.release_date) ? " (" + new Date(props.movie.release_date).getFullYear()+")" : '' }
             </Typography>
+
             { props.movie.genre_ids.length>0
               ?
                 <Typography variant="subtitle2" color="textSecondary" component="p">
@@ -55,6 +57,7 @@ export const MovieItem = (props) => {
               :
                 ''
             }
+
             <Typography variant="body2" color="textSecondary" component="p">
               {props.movie.overview.length > 0 ? props.movie.overview : "К сожалению, краткое описание фильма на русском языке, отсутствует."}
             </Typography>

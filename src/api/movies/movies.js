@@ -1,5 +1,4 @@
 import { api } from '../api';
-import axios from "axios/index";
 
 const TMDB_IMAGE_URL = process.env.REACT_APP_TMDB_IMAGE_URL;
 
@@ -23,4 +22,3 @@ export const fetchGenres = (config) => {
     .then(({ data }) => data )
     .catch((error) => { throw error.data });
 };
-

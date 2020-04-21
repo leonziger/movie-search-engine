@@ -1,12 +1,12 @@
 .MuiCardContent-root {
-    height: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: justify;
+  height: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: justify;
 }
 @media(max-width: 479px) {
-    .MuiCardContent-root {
-        height: auto;
-    }
+  .MuiCardContent-root {
+    height: auto;
+  }
 }
 
