@@ -7,6 +7,10 @@ const transformMovie = (movie) => {
   movie.backdrop_path = TMDB_IMAGE_URL + movie.backdrop_path;
 };
 
+const transformGenres = (genres) => {
+  return genres.reduce((genres, genre) => ({ ...genres, [genre.id]: genre.name }), {});
+};
+
 export const fetchMovies = (config) => {
   return api.get('/search/movie', config)
     .then(({ data }) => {
@@ -19,6 +23,6 @@ export const fetchMovies = (config) => {
 
 export const fetchGenres = (config) => {
   return api.get('/genre/movie/list?', config)
-    .then(({ data }) => data )
+    .then(({ data }) => transformGenres(data.genres))
     .catch((error) => { throw error.data });
 };

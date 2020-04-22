@@ -1,28 +1,58 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, TextField } from '@material-ui/core';
-import './SearchForm.css';
+import { MoviesContext } from '../MoviesProvider';
 
-export const SearchForm  = (props) => {
+const useStyles = makeStyles({
+  form: {
+    display: 'flex',
+    width: '100%',
+    margin: '10px 0 15px',
+  },
+  input: {
+    backgroundColor: 'white',
+  },
+  button: {
+    marginLeft: '10px',
+    height: '99%'
+  }
+});
+
+export const SearchForm = () => {
+  const [ value, setValue ] = useState('');
+  const { searchMovies } = useContext(MoviesContext);
+  const classes = useStyles();
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const submitForm = (event) => {
+    event.preventDefault();
+    searchMovies({ query: value });
+  };
+
   return (
     <Grid container spacing={1}>
-      <form className="search-form">
-        <Grid item lg={11}>
+      <form className={classes.form} onSubmit={submitForm}>
+        <Grid item xs={11}>
           <TextField
-            InputProps = {{className : 'whiteBg'}}
+            className={classes.input}
+            fullWidth
+            autoComplete="off"
             label="Поиск фильма"
             name="film"
             color="primary"
             id="outlined-basic"
             variant="outlined"
-            fullWidth
             size="medium"
-            value={props.query}
-            onChange={props.onChange}
+            value={value}
+            onChange={handleChange}
           />
         </Grid>
 
         <Grid item lg={1}>
-          <Button variant="contained" color="primary" onClick={props.submitForm}>Поиск</Button>
+          <Button className={classes.button} variant="contained" color="primary" type="submit">Поиск</Button>
         </Grid>
       </form>
     </Grid>

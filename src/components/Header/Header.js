@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Container, Link, Paper, Typography } from '@material-ui/core';
 import { SearchForm } from '../SearchForm';
 
-export const Header = (props) => {
+const useStyles = makeStyles({
+  headline: {
+  paddingTop: '10px',
+  }
+});
+
+export const Header = () => {
+  const classes = useStyles();
+
   return (
     <Paper elevation={1}>
       <Container>
-        <Typography variant="h6" component="h1" color="textPrimary" align="center">
+        <Typography variant="h6" component="h1" color="textPrimary" align="center" className={classes.headline}>
           <Link color="primary" underline="none" href="/">Movie Search Engine</Link>
         </Typography>
 
-        <SearchForm
-          query={props.query}
-          currentPage={props.currentPage}
-          totalPages={props.totalPages}
-          onChange={props.handleChange}
-          formSubmitHandler={props.formSubmitHandler}
-          submitForm={props.submitForm}
-        />
+        <SearchForm />
       </Container>
     </Paper>
   );
