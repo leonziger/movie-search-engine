@@ -1,16 +1,23 @@
-import React, { useContext } from 'react';
-import { Container, Typography } from '@material-ui/core';
-import { MoviesContext } from '../../../MoviesProvider';
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter as Router, useParams } from 'react-router-dom';
+import { MoviesProvider } from '../../../MoviesProvider';
+import { Header } from '../../../Header';
+import { Footer } from '../../../Footer';
 
 export const Movie = () => {
-  const { movies } = useContext(MoviesContext);
+  const movie = useParams();
+  console.log('movie', movie);
 
   return (
-    <Container>
-      <Typography variant="body2" color="textPrimary" align="center">
-        Movie show { movies }
-      </Typography>
-
-    </Container>
+    <Router>
+      <MoviesProvider>
+        <Header />
+        <Container>
+          <h3>Echo  echo</h3>
+        </Container>
+        <Footer />
+      </MoviesProvider>
+    </Router>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import 'typeface-roboto';
 import { MoviesProvider } from './components/MoviesProvider';
 import { Header } from './components/Header';
@@ -8,10 +9,13 @@ import './App.css';
 
 export const App = () => {
   return (
-    <MoviesProvider>
-      <Header />
-      <Main />
-      <Footer />
-    </MoviesProvider>
+    <Router>
+      <MoviesProvider>
+        <Header />
+        <Main />
+        <Footer />
+      </MoviesProvider>
+    </Router>
   );
 };
+

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography} from '@material-ui/core';
 import { cutString } from '../../../../helpers/cutString';
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 export const MovieItem = ({ movie }) => {
   const [ isFailMedia, setIsFailMedia ] = useState(false);
-  const { genres  } = useContext(MoviesContext);
+  const { genres } = useContext(MoviesContext);
   const classes = useStyles();
 
   const handleMediaError = () => {
@@ -33,7 +33,7 @@ export const MovieItem = ({ movie }) => {
 
   return (
     <Router>
-      <Link to={"/Movie/"+movie.id}>
+      <Link to={"/movie/"+movie.id} children={<Movie />}>
         <Card className={classes.root} variant="outlined" square>
           <CardMedia
             className={classes.media}
@@ -61,9 +61,7 @@ export const MovieItem = ({ movie }) => {
       </Link>
 
       <Switch>
-        <Route path={"/movie/"+movie.id} component={Movie}>
-          <Movie id={movie.id}/>
-        </Route>
+        <Route path={"/movie/:"+movie.id} component={<Movie/>}/>
       </Switch>
     </Router>
   );

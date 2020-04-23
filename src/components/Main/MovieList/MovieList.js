@@ -14,6 +14,7 @@ const useStyles = makeStyles({
   },
   clean: {
     background: 'none',
+    minHeight: '500px',
     margin: '20px'
   }
 });
@@ -23,11 +24,11 @@ export const MovieList = () => {
   const classes = useStyles();
 
   return (
-    <div className={!totalResults ? classes.main : classes.clean}>
+    <div className={classes.clean}>
       <Container>
         {totalResults > 0 ?
           <div>
-            <MovieNavBar />
+            <MovieNavBar/>
 
             <Grid container spacing={4}>
               {movies.map(movie =>
