@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
-import {MoviesContext} from '../../../MoviesProvider';
+import { MoviesContext } from '../../../MoviesProvider';
 import './MovieNavBar.css';
 
 const useStyles = makeStyles({
