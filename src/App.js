@@ -15,6 +15,7 @@ export const App = () => {
         <Header />
         <Router>
           <Route path="/" exact component={Main} />
+          <Route path="/movie-search-engine" component={Main} />
           <Route path="/movie/:id" component={Movie} />
         </Router>
         <Footer />

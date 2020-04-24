@@ -2,22 +2,24 @@ import React, { useState, useContext } from 'react';
 import { Container, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { convertDate } from '../../../../helpers/convertDate';
 import { MoviesContext, MoviesProvider } from '../../../MoviesProvider';
 import errorImage from '../MovieItem/camera.png';
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
-    margin: '10px 0 20px'
+    margin: '10px 0 0'
   },
   media: {
     backgroundSize: 'contain',
     height: '300px',
     maxWidth: '200px',
-    margin: '20px auto 0'
+    margin: '20px auto'
   },
   content: {
-    flexGrow: 1
+    flexGrow: 1,
+    width: '100%'
   },
   overview: {
     marginBottom: '20px'
@@ -30,7 +32,6 @@ export const Movie = () => {
   const [ isFailMedia, setIsFailMedia ] = useState(false);
   const moviesResult = movies.filter(film => Number(film.id) === Number(id));
   const currenMovie = moviesResult[0];
-  console.log(currenMovie);
   const classes = useStyles();
 
   const handleMediaError = () => {
@@ -47,21 +48,23 @@ export const Movie = () => {
             component="img"
             onError={handleMediaError}
           />
-          <CardContent>
+          <CardContent className={classes.content}>
             <Typography variant="h4" color="textPrimary" component="h3" className={classes.overview}>
               {currenMovie.title}
             </Typography>
             <Typography variant="body2" color="textPrimary" component="p">
               <b>Популярность: </b>{currenMovie.popularity} ({currenMovie.vote_count} / {currenMovie.vote_average})
             </Typography>
-            <Typography variant="body2" color="textPrimary" component="p">
-              <b>Дата релиза: </b>{currenMovie.release_date}
-            </Typography>
+            {currenMovie.release_date &&
+              <Typography variant="body2" color="textPrimary" component="p">
+                <b>Дата релиза: </b>{convertDate(currenMovie.release_date)}
+              </Typography>
+            }
             <Typography variant="body2" color="textPrimary" component="p">
               <b>Оригинальное названиe: </b>{currenMovie.original_title}
             </Typography>
             <Typography variant="body2" color="textPrimary" component="p">
-              <b>Язык оригинала: </b>{currenMovie.original_language ? "английский" : currenMovie.original_language}
+              <b>Язык оригинала: </b>{currenMovie.original_language==='en' ? "английский" : currenMovie.original_language}
             </Typography>
             {currenMovie.genre_ids.length > 0 &&
             <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>

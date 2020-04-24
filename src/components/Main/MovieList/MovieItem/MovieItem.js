@@ -7,6 +7,9 @@ import { MoviesContext } from '../../../MoviesProvider';
 import errorImage from './camera.png';
 
 const useStyles = makeStyles({
+  link: {
+    textDecoration: 'none',
+  },
   root: {
     height: '100%',
   },
@@ -31,7 +34,7 @@ export const MovieItem = ({ movie }) => {
   };
 
   return (
-    <Link to={"/movie/"+movie.id}>
+    <Link to={"/movie/"+movie.id} className={classes.link}>
       <Card className={classes.root} variant="outlined" square>
         <CardMedia
           className={classes.media}
