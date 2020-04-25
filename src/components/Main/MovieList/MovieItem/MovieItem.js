@@ -38,7 +38,7 @@ export const MovieItem = ({ movie }) => {
       <Card className={classes.root} variant="outlined" square>
         <CardMedia
           className={classes.media}
-          src={isFailMedia ? errorImage : movie.backdrop_path || movie.poster_path}
+          src={isFailMedia ? errorImage : movie.backdrop_path || movie.poster_path || errorImage}
           component="img"
           onError={handleMediaError}
         />

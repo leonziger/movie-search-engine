@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 export const Movie = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   const { movies, genres } = useContext(MoviesContext);
   const [ isFailMedia, setIsFailMedia ] = useState(false);
   const moviesResult = movies.filter(film => Number(film.id) === Number(id));

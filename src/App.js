@@ -10,17 +10,15 @@ import './App.css';
 
 export const App = () => {
   return (
-
-      <MoviesProvider>
-        <Header />
-        <Router>
-          <Route path="/" exact component={Main} />
-          <Route path="/movie-search-engine" component={Main} />
-          <Route path="/movie/:id" component={Movie} />
-        </Router>
-        <Footer />
-      </MoviesProvider>
-
+    <MoviesProvider>
+      <Header />
+      <Router>
+        <Route path="/" exact component={Main} />
+        <Route path="/movie-search-engine" component={Main} />
+        <Route path="/movie/:id" component={Movie} />
+      </Router>
+      <Footer />
+    </MoviesProvider>
   );
 };
 

@@ -19,7 +19,6 @@ export const MoviesProvider = ({ children }) => {
   const [ movies, setMovies ] = useState([]);
   const [ genres, setGenres ] = useState([]);
   const [ movie, setMovie ] = useState({});
-  const [ firstSearch, setFirstSearch ] = useState(false);
   const [ error, setError ] = useState(false);
 
   const searchMovies = (newFilter = {}) => {
@@ -67,7 +66,6 @@ export const MoviesProvider = ({ children }) => {
     movies,
     genres,
     movie,
-    firstSearch,
     error,
 
     // functions
