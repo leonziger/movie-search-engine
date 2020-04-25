@@ -21,8 +21,14 @@ export const fetchMovies = (config) => {
     .catch((error) => { throw error.data });
 };
 
+export const fetchSingleMovie = (id, config) => {
+  return api.get('/movie/' + id, config)
+    .then(data => data)
+    .catch((error) => { throw error.data });
+};
+
 export const fetchGenres = (config) => {
-  return api.get('/genre/movie/list?', config)
+  return api.get('/genre/movie/list', config)
     .then(({ data }) => transformGenres(data.genres))
     .catch((error) => { throw error.data });
 };

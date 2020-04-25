@@ -17,8 +17,8 @@ export const MoviesProvider = ({ children }) => {
   const [ totalPages, setTotalPages ] = useState(0);
   const [ totalResults, setTotalResults ] = useState(0);
   const [ movies, setMovies ] = useState([]);
+  const [ singleMovie, setSingleMovie ] = useState({});
   const [ genres, setGenres ] = useState([]);
-  const [ movie, setMovie ] = useState({});
   const [ error, setError ] = useState(false);
 
   const searchMovies = (newFilter = {}) => {
@@ -44,6 +44,19 @@ export const MoviesProvider = ({ children }) => {
       .catch(error => setError(true));
   };
 
+  const searchSingleMovie = (newFilter = {}) => {
+    moviesApi.fetchSingleMovie(newFilter, {
+      params: {
+        'language': 'ru-RU'
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch(error => setError(true));
+  };
+
   const searchGenres = (filter = {}) => {
     moviesApi.fetchGenres({
       params: {
@@ -65,13 +78,12 @@ export const MoviesProvider = ({ children }) => {
     totalResults,
     movies,
     genres,
-    movie,
     error,
 
     // functions
     searchMovies,
-    changePage,
-    setMovie
+    searchSingleMovie,
+    changePage
   };
 
   useEffect(() => {
