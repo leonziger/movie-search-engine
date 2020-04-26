@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Container, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { convertDate } from '../../../../helpers/convertDate';
-import { MoviesContext, MoviesProvider } from '../../../MoviesProvider';
+import * as moviesApi from "../../../../api/movies";
 import errorImage from '../MovieItem/camera.png';
 
 const useStyles = makeStyles({
@@ -28,62 +28,71 @@ const useStyles = makeStyles({
 
 export const Movie = () => {
   const { id } = useParams();
-  const { searchSingleMovie } = useContext(MoviesContext);
-  const singleMovie = searchSingleMovie(id);
-  console.log('singleMovie', singleMovie);
   const [ isFailMedia, setIsFailMedia ] = useState(false);
+  const [ currentMovie, setCurrentMovie ] = useState({});
+  const [ error, setError ] = useState(false);
   const classes = useStyles();
+
+  const searchSingleMovie = (id) => {
+    moviesApi.fetchSingleMovie(id, {
+      params: {
+        'language': 'ru-RU'
+      }
+    })
+      .then(response => setCurrentMovie(response.data))
+      .catch(error => setError(true));
+  };
 
   const handleMediaError = () => {
     setIsFailMedia(true);
   };
 
+  searchSingleMovie(id);
+
   return (
-    <MoviesProvider>
-      <Container>
-        <Card className={classes.root}>
-          {/*<CardMedia*/}
-            {/*className={classes.media}*/}
-            {/*src={isFailMedia ? errorImage : singleMovie.backdrop_path || singleMovie.poster_path}*/}
-            {/*component="img"*/}
-            {/*onError={handleMediaError}*/}
-          {/*/>*/}
+    <Container>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          src={isFailMedia ? errorImage : currentMovie.backdrop_path || currentMovie.poster_path}
+          component="img"
+          onError={handleMediaError}
+        />
 
-          <CardContent className={classes.content}>
-            {/*<Typography variant="h4" color="textPrimary" component="h3" className={classes.overview}>*/}
-              {/*{singleMovie.title}*/}
-            {/*</Typography>*/}
+        <CardContent className={classes.content}>
+          <Typography variant="h4" color="textPrimary" component="h3" className={classes.overview}>
+            {currentMovie.title}
+          </Typography>
 
-            {/*<Typography variant="body2" color="textPrimary" component="p">*/}
-              {/*<b>Популярность: </b>{singleMovie.popularity} ({singleMovie.vote_count} / {singleMovie.vote_average})*/}
-            {/*</Typography>*/}
+          <Typography variant="body2" color="textPrimary" component="p">
+            <b>Популярность: </b>{currentMovie.popularity} ({currentMovie.vote_count} / {currentMovie.vote_average})
+          </Typography>
 
-            {/*{singleMovie.release_date &&*/}
-              {/*<Typography variant="body2" color="textPrimary" component="p">*/}
-                {/*<b>Дата релиза: </b>{convertDate(singleMovie.release_date)}*/}
-              {/*</Typography>*/}
-            {/*}*/}
+          {currentMovie.release_date &&
+            <Typography variant="body2" color="textPrimary" component="p">
+              <b>Дата релиза: </b>{convertDate(currentMovie.release_date)}
+            </Typography>
+          }
 
-            {/*<Typography variant="body2" color="textPrimary" component="p">*/}
-              {/*<b>Оригинальное названиe: </b>{singleMovie.original_title}*/}
-            {/*</Typography>*/}
+          <Typography variant="body2" color="textPrimary" component="p">
+            <b>Оригинальное названиe: </b>{currentMovie.original_title}
+          </Typography>
 
-            {/*<Typography variant="body2" color="textPrimary" component="p">*/}
-              {/*<b>Язык оригинала: </b>{singleMovie.original_language==='en' ? "английский" : singleMovie.original_language}*/}
-            {/*</Typography>*/}
+          <Typography variant="body2" color="textPrimary" component="p">
+            <b>Язык оригинала: </b>{currentMovie.original_language==='en' ? "английский" : currentMovie.original_language}
+          </Typography>
 
-            {/*{singleMovie.genre_ids.length > 0 &&*/}
-            {/*<Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>*/}
-              {/*<b>Жанр: </b>{singleMovie.genre_ids.map((id) => genres[id]).join(', ')}*/}
-            {/*</Typography>*/}
-            {/*}*/}
+          {currentMovie.genres.length > 0 &&
+          <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
+            <b>Жанр: </b>{currentMovie.genres}
+          </Typography>
+          }
 
-            {/*<Typography variant="body2" color="textPrimary" component="p">*/}
-              {/*<b>Обзор: </b>{singleMovie.overview.length > 0 ? singleMovie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}*/}
-            {/*</Typography>*/}
-          </CardContent>
-        </Card>
-      </Container>
-    </MoviesProvider>
+          {/*<Typography variant="body2" color="textPrimary" component="p">*/}
+            {/*<b>Обзор: </b>{currentMovie.overview.length > 0 ? currentMovie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}*/}
+          {/*</Typography>*/}
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
