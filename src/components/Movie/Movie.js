@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { convertDate } from '../../../../helpers/convertDate';
-import * as moviesApi from "../../../../api/movies";
-import errorImage from '../MovieItem/camera.png';
+import { convertDate } from '../../helpers/convertDate';
+import * as moviesApi from '../../api/movies/index';
+import errorImage from '../Main/MovieList/MovieItem/camera.png';
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +39,11 @@ export const Movie = () => {
         'language': 'ru-RU'
       }
     })
-      .then(response => setCurrentMovie(response.data))
+      .then(response => {
+        setCurrentMovie(response.data);
+        console.log(response.data);
+        console.log(currentMovie);
+      })
       .catch(error => setError(true));
   };
 
@@ -47,7 +51,9 @@ export const Movie = () => {
     setIsFailMedia(true);
   };
 
-  searchSingleMovie(id);
+  useEffect(() => {
+    searchSingleMovie(id);
+  },[]);
 
   return (
     <Container>
