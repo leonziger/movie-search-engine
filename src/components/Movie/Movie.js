@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     width: '100%'
   },
   overview: {
-    marginBottom: '20px'
+    marginTop: '20px'
   }
 });
 
@@ -46,11 +46,10 @@ export const Movie = () => {
     let result = '';
 
     array.production_companies.forEach(company => {
-      if (company.origin_country.length > 0) {
-        result = result + company.name + '(' + company.origin_country + '), ';
-      } else {
-        result = result + company.name + ', ';
-      }
+      company.origin_country.length > 0 ?
+        result = result + company.name + `(${company.origin_country}), `
+      :
+        result = result + company.name + ', '
     });
 
     return result.slice(0,-2);
@@ -64,6 +63,7 @@ export const Movie = () => {
     })
       .then(response => {
         moviesApi.transformMovie(response.data);
+
         if (response.data.belongs_to_collection) {
           moviesApi.transformMovie(response.data.belongs_to_collection);
         }
@@ -81,7 +81,7 @@ export const Movie = () => {
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          src={isFailMedia ? errorImage : movie.backdrop_path || movie.poster_path}
+          src={isFailMedia ? errorImage : movie.backdrop_path || movie.poster_path || errorImage}
           component="img"
           onError={handleMediaError}
         />
@@ -100,7 +100,7 @@ export const Movie = () => {
               <b>Бюджет: </b>{separateDigit(movie.budget)} $
             </Typography>
           :
-            ''
+            ""
           }
 
           {movie.release_date &&
@@ -117,32 +117,35 @@ export const Movie = () => {
             <b>Язык оригинала: </b>{movie.original_language==='en' ? "английский" : movie.original_language}
           </Typography>
 
-          {movie.genres &&
-          <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
-            <b>Жанр: </b>{movie.genres.map((genre) => genre.name).join(', ')}
-          </Typography>
+          {movie.belongs_to_collection && movie.belongs_to_collection.name ?
+            <Typography variant="body2" color="textPrimary" component="p">
+              <b>Коллекция: </b>{movie.belongs_to_collection.name}
+            </Typography>
+          :
+            ""
+          }
+
+          {Array.isArray(movie.genres) && movie.genres.length ?
+            <Typography variant="body2" color="textPrimary" component="p">
+              <b>Жанр: </b>{movie.genres.map((genre) => genre.name).join(', ')}
+            </Typography>
+          :
+            ""
           }
 
           <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
             <b>Обзор: </b>{movie.overview ? movie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}
           </Typography>
 
-          {movie.production_companies &&
-          <Typography variant="body2" color="textPrimary" component="p">
-            <b>Кинокомпании: </b>{transformCompanies(movie)}
-          </Typography>
+          {Array.isArray(movie.production_companies) && movie.production_companies.length > 0 ?
+            <Typography variant="body2" color="textPrimary" component="p">
+              <b>Кинокомпании: </b>{transformCompanies(movie)}
+            </Typography>
+          :
+            ""
           }
 
         </CardContent>
-
-        {movie.belongs_to_collection &&
-          <CardMedia
-            className={classes.media}
-            src={movie.belongs_to_collection.backdrop_path || movie.belongs_to_collection.poster_path}
-            component="img"
-          />
-        }
-
       </Card>
     </Container>
   );
