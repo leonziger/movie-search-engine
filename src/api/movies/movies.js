@@ -2,7 +2,7 @@ import { api } from '../api';
 
 const TMDB_IMAGE_URL = process.env.REACT_APP_TMDB_IMAGE_URL;
 
-const transformMovie = (movie) => {
+export const transformMovie = (movie) => {
   movie.poster_path = movie.poster_path && TMDB_IMAGE_URL + movie.poster_path;
   movie.backdrop_path = movie.backdrop_path && TMDB_IMAGE_URL + movie.backdrop_path;
 };

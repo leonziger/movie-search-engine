@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,9 +29,13 @@ const useStyles = makeStyles({
 export const Movie = () => {
   const { id } = useParams();
   const [ isFailMedia, setIsFailMedia ] = useState(false);
-  const [ currentMovie, setCurrentMovie ] = useState({});
+  const [ movie, setCurrentMovie ] = useState({});
   const [ error, setError ] = useState(false);
   const classes = useStyles();
+
+  const handleMediaError = () => {
+    setIsFailMedia(true);
+  };
 
   const searchSingleMovie = (id) => {
     moviesApi.fetchSingleMovie(id, {
@@ -40,63 +44,70 @@ export const Movie = () => {
       }
     })
       .then(response => {
+        moviesApi.transformMovie(response.data);
         setCurrentMovie(response.data);
-        console.log(response.data);
-        console.log(currentMovie);
       })
       .catch(error => setError(true));
   };
 
-  const handleMediaError = () => {
-    setIsFailMedia(true);
-  };
-
   useEffect(() => {
     searchSingleMovie(id);
-  },[]);
+  }, [id]);
 
   return (
     <Container>
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          src={isFailMedia ? errorImage : currentMovie.backdrop_path || currentMovie.poster_path}
+          src={isFailMedia ? errorImage : movie.backdrop_path || movie.poster_path}
           component="img"
           onError={handleMediaError}
         />
 
         <CardContent className={classes.content}>
           <Typography variant="h4" color="textPrimary" component="h3" className={classes.overview}>
-            {currentMovie.title}
+            {movie.title}
           </Typography>
 
           <Typography variant="body2" color="textPrimary" component="p">
-            <b>Популярность: </b>{currentMovie.popularity} ({currentMovie.vote_count} / {currentMovie.vote_average})
+            <b>Популярность: </b>{movie.popularity} ({movie.vote_count} / {movie.vote_average})
           </Typography>
 
-          {currentMovie.release_date &&
+          {movie.budget &&
             <Typography variant="body2" color="textPrimary" component="p">
-              <b>Дата релиза: </b>{convertDate(currentMovie.release_date)}
+              <b>Бюджет: </b>{movie.budget}$
+            </Typography>
+          }
+
+          {movie.release_date &&
+            <Typography variant="body2" color="textPrimary" component="p">
+              <b>Дата релиза: </b>{convertDate(movie.release_date)}
             </Typography>
           }
 
           <Typography variant="body2" color="textPrimary" component="p">
-            <b>Оригинальное названиe: </b>{currentMovie.original_title}
+            <b>Оригинальное названиe: </b>{movie.original_title}
           </Typography>
 
+          {movie.homepage &&
           <Typography variant="body2" color="textPrimary" component="p">
-            <b>Язык оригинала: </b>{currentMovie.original_language==='en' ? "английский" : currentMovie.original_language}
-          </Typography>
-
-          {currentMovie.genres.length > 0 &&
-          <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
-            <b>Жанр: </b>{currentMovie.genres}
+            <a href={movie.homepage} target="_blank" rel="noopener noreferrer">домашняя страница фильма</a>
           </Typography>
           }
 
-          {/*<Typography variant="body2" color="textPrimary" component="p">*/}
-            {/*<b>Обзор: </b>{currentMovie.overview.length > 0 ? currentMovie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}*/}
+          <Typography variant="body2" color="textPrimary" component="p">
+            <b>Язык оригинала: </b>{movie.original_language==='en' ? "английский" : movie.original_language}
+          </Typography>
+
+          {/*{movie.genres.length > 0 &&*/}
+          {/*<Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>*/}
+            {/*<b>Жанр: </b>{movie.genres}*/}
           {/*</Typography>*/}
+          {/*}*/}
+
+          <Typography variant="body2" color="textPrimary" component="p">
+            <b>Обзор: </b>{movie.overview ? movie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}
+          </Typography>
         </CardContent>
       </Card>
     </Container>
