@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { MoviesContext } from '../MoviesProvider';
 
 const styles = {
   container: {
@@ -13,15 +12,14 @@ const styles = {
 };
 
 export const Loader = () => {
-  const { isLoading } = useContext(MoviesContext);
+
+  useEffect(() => {
+    Loader();
+  }, []);
 
   return (
     <div style={styles.container}>
-      {isLoading ?
-        <CircularProgress style={styles.spinner} size={68} thikness={5} />
-      :
-        "Bla Bla Bla"
-      }
+      <CircularProgress style={styles.spinner} size={68} thikness={5} />
     </div>
   )
 }

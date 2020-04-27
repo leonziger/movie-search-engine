@@ -49,7 +49,9 @@ export const Movie = () => {
       company.origin_country.length > 0 ?
         result = result + company.name + `(${company.origin_country}), `
       :
-        result = result + company.name + ', '
+        result = result + company.name + ', ';
+
+      return result;
     });
 
     return result.slice(0,-2);
