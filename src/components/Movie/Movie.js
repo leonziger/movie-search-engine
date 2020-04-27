@@ -56,19 +56,8 @@ export const Movie = () => {
   };
 
   const searchSingleMovie = (id) => {
-    moviesApi.fetchSingleMovie(id, {
-      params: {
-        'language': 'ru-RU'
-      }
-    })
-      .then(response => {
-        moviesApi.transformMovie(response.data);
-
-        if (response.data.belongs_to_collection) {
-          moviesApi.transformMovie(response.data.belongs_to_collection);
-        }
-        setCurrentMovie(response.data);
-      })
+    moviesApi.fetchSingleMovie(id)
+      .then(response => setCurrentMovie(response.data))
       .catch(error => setError(true));
   };
 
@@ -95,12 +84,10 @@ export const Movie = () => {
             <b>Популярность: </b>{movie.popularity} ({movie.vote_count} / {movie.vote_average})
           </Typography>
 
-          {movie.budget ?
+          {!!movie.budget &&
             <Typography variant="body2" color="textPrimary" component="p">
-              <b>Бюджет: </b>{separateDigit(movie.budget)} $
+              <b>Бюджет: </b> ${separateDigit(movie.budget)}
             </Typography>
-          :
-            ""
           }
 
           {movie.release_date &&
@@ -117,35 +104,38 @@ export const Movie = () => {
             <b>Язык оригинала: </b>{movie.original_language==='en' ? "английский" : movie.original_language}
           </Typography>
 
-          {movie.belongs_to_collection && movie.belongs_to_collection.name ?
+          {movie.belongs_to_collection && movie.belongs_to_collection.name &&
             <Typography variant="body2" color="textPrimary" component="p">
               <b>Коллекция: </b>{movie.belongs_to_collection.name}
             </Typography>
-          :
-            ""
           }
 
-          {Array.isArray(movie.genres) && movie.genres.length ?
+          {movie.genres && movie.genres.length > 0 &&
             <Typography variant="body2" color="textPrimary" component="p">
               <b>Жанр: </b>{movie.genres.map((genre) => genre.name).join(', ')}
             </Typography>
-          :
-            ""
           }
 
           <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
             <b>Обзор: </b>{movie.overview ? movie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}
           </Typography>
 
-          {Array.isArray(movie.production_companies) && movie.production_companies.length > 0 ?
+          {movie.production_companies && movie.production_companies.length > 0 &&
             <Typography variant="body2" color="textPrimary" component="p">
               <b>Кинокомпании: </b>{transformCompanies(movie)}
             </Typography>
-          :
-            ""
           }
-
         </CardContent>
+
+        {movie.belongs_to_collection &&
+          <CardMedia
+            className={classes.media}
+            src={isFailMedia ? errorImage : movie.belongs_to_collection.backdrop_path || movie.belongs_to_collection.poster_path || errorImage}
+            component="img"
+            onError={handleMediaError}
+          />
+        }
+
       </Card>
     </Container>
   );

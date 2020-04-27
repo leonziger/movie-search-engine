@@ -7,6 +7,7 @@ export const api = axios.create({
 api.interceptors.request.use((config) => {
   config.params = config.params || {};
   config.params.api_key = process.env.REACT_APP_TMDB_API_KEY;
+  config.params.language = 'ru-RU';
 
   return config;
 });

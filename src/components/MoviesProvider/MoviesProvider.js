@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import * as moviesApi from '../../api/movies';
+import Preloader from '../Preloader';
 
 const initialValues = {
   filter: {
     query: '',
     page: 1,
-    language: 'ru-RU',
     include_adult: false
   }
 };
@@ -19,6 +19,7 @@ export const MoviesProvider = ({ children }) => {
   const [ movies, setMovies ] = useState([]);
   const [ genres, setGenres ] = useState([]);
   const [ error, setError ] = useState(false);
+  const [ isFetching, setFetching ] = useState(false);
 
   const searchMovies = (newFilter = {}) => {
     if ( newFilter.query && newFilter.query.length <= 1) {
@@ -46,7 +47,6 @@ export const MoviesProvider = ({ children }) => {
   const searchGenres = (filter = {}) => {
     moviesApi.fetchGenres({
       params: {
-        'language': 'ru-RU',
         ...filter
       }
     })
@@ -65,10 +65,12 @@ export const MoviesProvider = ({ children }) => {
     movies,
     genres,
     error,
+    isFetching,
 
     // functions
     searchMovies,
-    changePage
+    changePage,
+    setFetching
   };
 
   useEffect(() => {

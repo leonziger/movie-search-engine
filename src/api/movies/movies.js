@@ -1,4 +1,5 @@
 import { api } from '../api';
+import * as moviesApi from './index';
 
 const TMDB_IMAGE_URL = process.env.REACT_APP_TMDB_IMAGE_URL;
 
@@ -23,7 +24,15 @@ export const fetchMovies = (config) => {
 
 export const fetchSingleMovie = (id, config) => {
   return api.get('/movie/' + id, config)
-    .then(data => data)
+    .then(data => {
+      transformMovie(data.data);
+
+      if (data.data.belongs_to_collection) {
+        moviesApi.transformMovie(data.data.belongs_to_collection);
+      }
+
+      return data;
+    })
     .catch((error) => { throw error.data });
 };
 
