@@ -15,6 +15,7 @@ const transformGenres = (genres) => {
 export const fetchMovies = (config) => {
   return api.get('/search/movie', config)
     .then(({ data }) => {
+
       data.results.forEach(transformMovie);
 
       return data;
