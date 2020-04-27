@@ -45,7 +45,7 @@ export const Movie = () => {
   const transformCompanies = (array) => {
     let result = '';
 
-    array.production_companies.forEach(company => {
+    array.production_companies.map(company => {
       company.origin_country.length > 0 ?
         result = result + company.name + `(${company.origin_country}), `
       :
@@ -116,9 +116,11 @@ export const Movie = () => {
             </Typography>
           }
 
-          <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
-            <b>Обзор: </b>{movie.overview ? movie.overview : "К сожалению, обзор фильма на русском языке отсутствует."}
-          </Typography>
+          {movie.overview && movie.overview.length > 0 &&
+            <Typography variant="body2" color="textPrimary" component="p" className={classes.overview}>
+              <b>Обзор: </b>{movie.overview}
+            </Typography>
+          }
 
           {movie.production_companies && movie.production_companies.length > 0 &&
             <Typography variant="body2" color="textPrimary" component="p">

@@ -18,7 +18,7 @@ export const MoviesProvider = ({ children }) => {
   const [ movies, setMovies ] = useState([]);
   const [ genres, setGenres ] = useState([]);
   const [ error, setError ] = useState(false);
-  const [ isLoading, setLoading ] = useState(false);
+  const [ isLoading, setLoading ] = useState(true);
 
   const searchMovies = (newFilter = {}) => {
     if ( newFilter.query && newFilter.query.length <= 1) {

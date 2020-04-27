@@ -4,6 +4,7 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { MoviesContext } from '../../MoviesProvider';
 import { MovieNavBar } from './MovieNavBar';
 import { MovieItem } from './MovieItem';
+import { Loader } from '../../Loader';
 import mainBgImage from '../../../mainbg.jpg';
 
 const useStyles = makeStyles({
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 export const MovieList = () => {
-  const { movies, totalResults } = useContext(MoviesContext);
+  const { movies, totalResults, isLoading } = useContext(MoviesContext);
   const classes = useStyles();
 
   return (
@@ -29,14 +30,15 @@ export const MovieList = () => {
         {totalResults > 0 ?
           <div>
             <MovieNavBar/>
-
-            <Grid container spacing={4}>
-              {movies.map(movie =>
-                <Grid item lg={3} md={4} sm={6} key={movie.id}>
-                  <MovieItem movie={movie}/>
-                </Grid>
-              )}
-            </Grid>
+            <Loader loading={isLoading}>
+              <Grid container spacing={4}>
+                {movies.map(movie =>
+                  <Grid item lg={3} md={4} sm={6} key={movie.id}>
+                    <MovieItem movie={movie}/>
+                  </Grid>
+                )}
+              </Grid>
+            </Loader>
           </div>
         :
           <div>

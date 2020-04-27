@@ -17,8 +17,10 @@ export const Loader = () => {
 
   return (
     <div style={styles.container}>
-      {isLoading &&
+      {isLoading ?
         <CircularProgress style={styles.spinner} size={68} thikness={5} />
+      :
+        "Bla Bla Bla"
       }
     </div>
   )
