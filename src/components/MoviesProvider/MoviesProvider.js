@@ -29,7 +29,7 @@ export const MoviesProvider = ({ children }) => {
       return;
     }
 
-    const loadingSpinner = (setLoading(true), () => {
+    const loadingIndicator = (setLoading(true), () => {
       moviesApi.fetchMovies({
         params: {
           ...filter, ...newFilter
@@ -45,7 +45,7 @@ export const MoviesProvider = ({ children }) => {
         .catch(error => setError(true));
     });
 
-    loadingSpinner();
+    loadingIndicator();
 };
 
   const searchGenres = (filter = {}) => {

@@ -1,11 +1,11 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import loadingIndicator from '../../loader.gif';
 
 const styles = {
   container: {
     width: '100%'
   },
-  spinner: {
+  indicator: {
     margin: '24px auto',
     display: 'block'
   }
@@ -14,7 +14,7 @@ const styles = {
 export const Loader = () => {
   return (
     <div style={styles.container}>
-      <CircularProgress style={styles.spinner} size={68} thikness={5} />
+      <img src={loadingIndicator} alt="" style={styles.indicator}/>
     </div>
-  )
+  );
 };
