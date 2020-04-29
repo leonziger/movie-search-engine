@@ -21,7 +21,7 @@ export const MoviesProvider = ({ children }) => {
   const [ isLoading, setLoading ] = useState(false);
 
   const searchMovies = (newFilter = {}) => {
-    if ( newFilter.query && newFilter.query.length <= 1) {
+    if (newFilter.query && newFilter.query.length <= 1) {
       setMovies([]);
       setTotalPages(0);
       setTotalResults(0);
@@ -29,7 +29,7 @@ export const MoviesProvider = ({ children }) => {
       return;
     }
 
-    setLoading({ isLoading: true }, () => {
+    const loadingSpinner = (setLoading(true), () => {
       moviesApi.fetchMovies({
         params: {
           ...filter, ...newFilter
@@ -44,7 +44,9 @@ export const MoviesProvider = ({ children }) => {
         })
         .catch(error => setError(true));
     });
-  };
+
+    loadingSpinner();
+};
 
   const searchGenres = (filter = {}) => {
     moviesApi.fetchGenres({
@@ -52,8 +54,8 @@ export const MoviesProvider = ({ children }) => {
         ...filter
       }
     })
-      .then(setGenres)
-      .catch(error => setError(true));
+    .then(setGenres)
+    .catch(error => setError(true));
   };
 
   const changePage = (event, page) => {
