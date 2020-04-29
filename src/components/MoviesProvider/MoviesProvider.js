@@ -29,24 +29,22 @@ export const MoviesProvider = ({ children }) => {
       return;
     }
 
-    const loadingIndicator = (setLoading(true), () => {
-      moviesApi.fetchMovies({
-        params: {
-          ...filter, ...newFilter
-        }
-      })
-        .then(response => {
-          setLoading(false);
-          setTotalPages(response.total_pages);
-          setTotalResults(response.total_results);
-          setMovies(response.results);
-          setFilter((filter) => ({ ...filter, ...newFilter, page: response.page }));
-        })
-        .catch(error => setError(true));
-    });
+    setLoading(true);
 
-    loadingIndicator();
-};
+    moviesApi.fetchMovies({
+      params: {
+        ...filter, ...newFilter
+      }
+    })
+      .then(response => {
+        setLoading(false);
+        setTotalPages(response.total_pages);
+        setTotalResults(response.total_results);
+        setMovies(response.results);
+        setFilter((filter) => ({ ...filter, ...newFilter, page: response.page }));
+    })
+      .catch(error => setError(true));
+  };
 
   const searchGenres = (filter = {}) => {
     moviesApi.fetchGenres({

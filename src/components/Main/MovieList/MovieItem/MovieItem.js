@@ -49,9 +49,9 @@ export const MovieItem = ({ movie }) => {
           </Typography>
 
           {movie.genre_ids.length > 0 &&
-            <Typography variant="subtitle2" color="textSecondary" component="p">
-              <b>Жанр: </b>{movie.genre_ids.map((id) => genres[id]).join(', ')}
-            </Typography>
+          <Typography variant="subtitle2" color="textSecondary" component="p">
+            <b>Жанр: </b>{movie.genre_ids.map((id) => genres[ id ]).join(', ')}
+          </Typography>
           }
 
           <Typography variant="body2" color="textSecondary" component="p">
@@ -60,5 +60,5 @@ export const MovieItem = ({ movie }) => {
         </CardContent>
       </Card>
     </Link>
-  );
-};
+    );
+  };

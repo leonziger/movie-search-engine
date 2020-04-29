@@ -11,11 +11,11 @@ const useStyles = makeStyles({
   main: {
     backgroundImage: `url(${mainBgImage})`,
     backgroundPosition: 'center',
-    minHeight: '500px'
+    minHeight: '1080px'
   },
   clean: {
     background: 'none',
-    minHeight: '500px',
+    minHeight: '1080px',
     margin: '20px'
   }
 });
@@ -25,23 +25,34 @@ export const MovieList = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.clean}>
-      <Container>
-        {isLoading ?
-          <Loader/>
-        :
-          <div>
-            <MovieNavBar/>
-            <Grid container spacing={4}>
-              {movies.map(movie =>
-                <Grid item lg={3} md={4} sm={6} key={movie.id}>
-                  <MovieItem movie={movie}/>
-                </Grid>
-              )}
-            </Grid>
+    <div className="movielist">
+      {isLoading ?
+        <Container>
+          <div className={classes.clean}>
+            <Loader/>
           </div>
-        }
-      </Container>
+        </Container>
+      :
+        <div className="movielist__search-results">
+          {movies.length > 0 ?
+            <Container>
+              <div className={classes.clean}>
+                <MovieNavBar/>
+
+                <Grid container spacing={4}>
+                  {movies.map(movie =>
+                    <Grid item lg={3} md={4} sm={6} key={movie.id}>
+                      <MovieItem movie={movie}/>
+                    </Grid>
+                  )}
+                </Grid>
+              </div>
+            </Container>
+          :
+            <div className={classes.main}></div>
+          }
+        </div>
+      }
     </div>
   );
 };
