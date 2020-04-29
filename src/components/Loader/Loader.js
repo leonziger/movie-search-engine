@@ -12,14 +12,9 @@ const styles = {
 };
 
 export const Loader = () => {
-
-  useEffect(() => {
-    Loader();
-  }, []);
-
   return (
     <div style={styles.container}>
       <CircularProgress style={styles.spinner} size={68} thikness={5} />
     </div>
   )
-}
+};

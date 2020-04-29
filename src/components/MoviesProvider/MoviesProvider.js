@@ -29,18 +29,21 @@ export const MoviesProvider = ({ children }) => {
       return;
     }
 
-    moviesApi.fetchMovies({
-      params: {
-        ...filter, ...newFilter
-      }
-    })
-      .then(response => {
-        setTotalPages(response.total_pages);
-        setTotalResults(response.total_results);
-        setMovies(response.results);
-        setFilter((filter) => ({ ...filter, ...newFilter, page: response.page }));
+    setLoading({ isLoading: true }, () => {
+      moviesApi.fetchMovies({
+        params: {
+          ...filter, ...newFilter
+        }
       })
-      .catch(error => setError(true));
+        .then(response => {
+          setLoading(false);
+          setTotalPages(response.total_pages);
+          setTotalResults(response.total_results);
+          setMovies(response.results);
+          setFilter((filter) => ({ ...filter, ...newFilter, page: response.page }));
+        })
+        .catch(error => setError(true));
+    });
   };
 
   const searchGenres = (filter = {}) => {
