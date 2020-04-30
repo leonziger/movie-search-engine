@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/movie-search-engine/static/css/main.899fce30.chunk.css",
-    "main.js": "/movie-search-engine/static/js/main.c2635681.chunk.js",
-    "main.js.map": "/movie-search-engine/static/js/main.c2635681.chunk.js.map",
+    "main.css": "/movie-search-engine/static/css/main.e38ef0b3.chunk.css",
+    "main.js": "/movie-search-engine/static/js/main.6454dbd4.chunk.js",
+    "main.js.map": "/movie-search-engine/static/js/main.6454dbd4.chunk.js.map",
     "runtime-main.js": "/movie-search-engine/static/js/runtime-main.3cb13f0f.js",
     "runtime-main.js.map": "/movie-search-engine/static/js/runtime-main.3cb13f0f.js.map",
     "static/css/2.2a89cbe2.chunk.css": "/movie-search-engine/static/css/2.2a89cbe2.chunk.css",
-    "static/js/2.a68b0364.chunk.js": "/movie-search-engine/static/js/2.a68b0364.chunk.js",
-    "static/js/2.a68b0364.chunk.js.map": "/movie-search-engine/static/js/2.a68b0364.chunk.js.map",
+    "static/js/2.f1e23e56.chunk.js": "/movie-search-engine/static/js/2.f1e23e56.chunk.js",
+    "static/js/2.f1e23e56.chunk.js.map": "/movie-search-engine/static/js/2.f1e23e56.chunk.js.map",
     "index.html": "/movie-search-engine/index.html",
-    "precache-manifest.5f03173ff6e5655b9fdc1d3a74fb06af.js": "/movie-search-engine/precache-manifest.5f03173ff6e5655b9fdc1d3a74fb06af.js",
+    "precache-manifest.42db8ba922359abc2f6cc94c0224672c.js": "/movie-search-engine/precache-manifest.42db8ba922359abc2f6cc94c0224672c.js",
     "service-worker.js": "/movie-search-engine/service-worker.js",
     "static/css/2.2a89cbe2.chunk.css.map": "/movie-search-engine/static/css/2.2a89cbe2.chunk.css.map",
-    "static/css/main.899fce30.chunk.css.map": "/movie-search-engine/static/css/main.899fce30.chunk.css.map",
-    "static/js/2.a68b0364.chunk.js.LICENSE.txt": "/movie-search-engine/static/js/2.a68b0364.chunk.js.LICENSE.txt",
+    "static/css/main.e38ef0b3.chunk.css.map": "/movie-search-engine/static/css/main.e38ef0b3.chunk.css.map",
+    "static/js/2.f1e23e56.chunk.js.LICENSE.txt": "/movie-search-engine/static/js/2.f1e23e56.chunk.js.LICENSE.txt",
     "static/media/camera.png": "/movie-search-engine/static/media/camera.c73a1804.png",
     "static/media/App.css": "/movie-search-engine/static/media/mainbg.10d10922.jpg",
     "static/media/index.css": "/movie-search-engine/static/media/roboto-latin-900italic.ebf6d164.woff2"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.3cb13f0f.js",
     "static/css/2.2a89cbe2.chunk.css",
-    "static/js/2.a68b0364.chunk.js",
-    "static/css/main.899fce30.chunk.css",
-    "static/js/main.c2635681.chunk.js"
+    "static/js/2.f1e23e56.chunk.js",
+    "static/css/main.e38ef0b3.chunk.css",
+    "static/js/main.6454dbd4.chunk.js"
   ]
 }
