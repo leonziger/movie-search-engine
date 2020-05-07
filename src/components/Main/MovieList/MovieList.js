@@ -15,13 +15,13 @@ const useStyles = makeStyles({
   },
   clean: {
     background: 'none',
-    minHeight: '1080px',
+    minHeight: '70vh',
     margin: '20px'
   }
 });
 
 export const MovieList = () => {
-  const { movies, totalResults, isLoading } = useContext(MoviesContext);
+  const { movies, totalResults, isLoading, mainBackground } = useContext(MoviesContext);
   const classes = useStyles();
 
   return (
@@ -49,7 +49,7 @@ export const MovieList = () => {
               </div>
             </Container>
           :
-            <div className={classes.main}></div>
+            <div className={mainBackground ? classes.main : classes.clean}></div>
           }
         </div>
       }

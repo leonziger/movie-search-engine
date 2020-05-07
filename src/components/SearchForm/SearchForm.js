@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   form: {
     display: 'flex',
     width: '100%',
-    margin: '10px 0 15px',
+    margin: '15px 0 15px 10px',
   },
   input: {
     backgroundColor: 'white',
@@ -30,10 +30,11 @@ export const SearchForm = () => {
   const submitForm = (event) => {
     event.preventDefault();
     searchMovies({ query: value });
+    console.log(window.location.href);
   };
 
   return (
-    <Grid container spacing={1}>
+    <Grid container>
       <form className={classes.form} onSubmit={submitForm}>
         <Grid item xs={11}>
           <TextField

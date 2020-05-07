@@ -19,6 +19,7 @@ export const MoviesProvider = ({ children }) => {
   const [ genres, setGenres ] = useState([]);
   const [ error, setError ] = useState(false);
   const [ isLoading, setLoading ] = useState(false);
+  const [ mainBackground, setMainBackground ] = useState(true);
 
   const searchMovies = (newFilter = {}) => {
     if (newFilter.query && newFilter.query.length <= 1) {
@@ -68,11 +69,13 @@ export const MoviesProvider = ({ children }) => {
     genres,
     error,
     isLoading,
+    mainBackground,
 
     // functions
     searchMovies,
     changePage,
-    setLoading
+    setLoading,
+    setMainBackground
   };
 
   useEffect(() => {

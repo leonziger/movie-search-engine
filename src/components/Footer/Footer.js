@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Link, Paper, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: 'black',
     minHeight: '30px',
@@ -13,9 +13,12 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '10px'
+    padding: '10px',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '0.7em'
+      },
   }
-});
+}));
 
 export function Footer() {
   const classes = useStyles();

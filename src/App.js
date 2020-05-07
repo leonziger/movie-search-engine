@@ -6,6 +6,7 @@ import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import { Movie } from './components/Movie';
+import { Search } from './components/Search';
 import './App.css';
 
 export const App = () => {
@@ -15,7 +16,11 @@ export const App = () => {
       <Router>
         <Route path="/" exact component={Main} />
         <Route path="/movie-search-engine" component={Main} />
+        <Route path="/movies" component={Main} />
+        <Route path="/tv" component={Main} />
+        <Route path="/search" component={Search} />
         <Route path="/movie/:id" component={Movie} />
+
       </Router>
       <Footer />
     </MoviesProvider>

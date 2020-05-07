@@ -7,29 +7,46 @@ import * as moviesApi from '../../api/movies/index';
 import errorImage from '../Main/MovieList/MovieItem/camera.png';
 import { Loader } from '../Loader';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     minHeight: '80vh'
   },
   root: {
     display: 'flex',
     margin: '10px 0 0',
-    boxShadow: 'none'
+    boxShadow: 'none',
+      [theme.breakpoints.down('xs')]: {
+        flexWrap: 'wrap',
+        padding: '0'
+      },
+  },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.3em',
+      padding: '0 0 10px',
+      textAlign: 'center'
+    },
   },
   media: {
     backgroundSize: 'contain',
     height: '300px',
     maxWidth: '200px',
-    margin: '20px auto'
+    margin: '20px auto',
+    [theme.breakpoints.down('xs')]: {
+      margin: '20px auto 0',
+    },
   },
   content: {
     flexGrow: 1,
-    width: '100%'
+    width: '100%',
+    [theme.breakpoints.down('xs')]: {
+      padding: '10px 0',
+    },
   },
   overview: {
     marginTop: '20px'
   }
-});
+}));
 
 export const Movie = () => {
   const { id } = useParams();
@@ -94,7 +111,7 @@ export const Movie = () => {
           />
 
           <CardContent className={classes.content}>
-            <Typography variant="h4" color="textPrimary" component="h3" className={classes.overview}>
+            <Typography variant="h4" color="textPrimary" component="h3" className={classes.title}>
               {movie.title}
             </Typography>
 
@@ -147,16 +164,6 @@ export const Movie = () => {
             </Typography>
             }
           </CardContent>
-
-          {movie.belongs_to_collection &&
-          <CardMedia
-            className={classes.media}
-            src={isFailMedia ? errorImage : movie.belongs_to_collection.backdrop_path || movie.belongs_to_collection.poster_path || errorImage}
-            component="img"
-            onError={handleMediaError}
-          />
-          }
-
         </Card>
       }
     </Container>

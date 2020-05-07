@@ -13,17 +13,6 @@
   color: white;
 }
 
-.App-content {
-  background-image: url(mainbg.jpg);
-  background-position: center;
-  min-height: 500px;
-}
-.App-content_clean {
-  background: none;
-  min-height: 500px;
-}
-
-
 .App-link {
   color: #61dafb;
 }

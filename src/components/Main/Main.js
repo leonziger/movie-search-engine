@@ -8,7 +8,7 @@ export const Main = () => {
   const { movies, error } = useContext(MoviesContext);
 
   return (
-    <div>
+    <div className="main">
       {movies ?
         <MovieList />
       :

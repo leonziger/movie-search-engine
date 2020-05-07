@@ -5,11 +5,18 @@ import Pagination from '@material-ui/lab/Pagination';
 import { MoviesContext } from '../../../MoviesProvider';
 import './MovieNavBar.css';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   pagination: {
-    paddingBottom: '10px'
+    paddingBottom: '10px',
+    '& > ul' : {
+      justifyContent: 'center',
+      marginTop: '10px',
+    },
+    '& > ul > li' : {
+      marginBottom: '10px',
+    }
   }
-});
+}));
 
 export const MovieNavBar = () => {
   const { filter, totalPages, totalResults, changePage } = useContext(MoviesContext);
