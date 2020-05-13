@@ -27,7 +27,7 @@ export function Footer() {
     <Paper variant="outlined" square className={classes.footer}>
       <Container>
         <Typography variant="h6" component="p" align="center" >
-          <Link underline="none" href="/" className={classes.link}>Movie Search Engine. Copyright 2020</Link>
+          <Link underline="none" href="/" className={classes.link}>Movie Poster. Copyright 2020</Link>
         </Typography>
       </Container>
     </Paper>

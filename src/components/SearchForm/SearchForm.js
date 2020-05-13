@@ -30,7 +30,6 @@ export const SearchForm = () => {
   const submitForm = (event) => {
     event.preventDefault();
     searchMovies({ query: value });
-    console.log(window.location.href);
   };
 
   return (

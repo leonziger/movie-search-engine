@@ -20,7 +20,6 @@ export const App = () => {
         <Route path="/tv" component={Main} />
         <Route path="/search" component={Search} />
         <Route path="/movie/:id" component={Movie} />
-
       </Router>
       <Footer />
     </MoviesProvider>

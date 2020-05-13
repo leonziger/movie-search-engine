@@ -9,7 +9,7 @@ import { Loader } from '../Loader';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    minHeight: '80vh'
+    minHeight: '20vh'
   },
   root: {
     display: 'flex',
