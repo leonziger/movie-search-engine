@@ -1,8 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Link, Typography, AppBar, Toolbar } from '@material-ui/core';
+import { Container, Typography, AppBar, Toolbar } from '@material-ui/core';
+import logo from './logo.png';
 
 const useStyles = makeStyles((theme) => ({
+  logo: {
+    width: '55px',
+  },
   root: {
     flexGrow: 1,
   },
@@ -11,7 +16,20 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: '#fff',
   },
+  link: {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#fff',
+  },
+  span: {
+    display: 'block',
+    marginLeft: '10px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
+  }
 }));
 
 export const Header = () => {
@@ -24,19 +42,22 @@ export const Header = () => {
         <Toolbar>
 
           <Typography variant="h6" className={classes.title}>
-            <Link underline="none" href="/" style={ {color: '#fff'} }>Movie poster</Link>
+            <NavLink exact to="/" className={classes.link}>
+              <img src={logo} className={classes.logo} alt="logo" />
+              <span className={classes.span}>Киноафиша</span>
+            </NavLink>
           </Typography>
 
           <Typography variant="h6" className={classes.title}>
-            <Link underline="none" href="/movies" style={ {color: '#fff'} }>Популярные фильмы</Link>
+            <NavLink to="/movies" className={classes.link}>Популярные фильмы</NavLink>
           </Typography>
 
           <Typography variant="h6" className={classes.title}>
-            <Link underline="none" href="/tv" style={ {color: '#fff'} }>Популярные Сериалы</Link>
+            <NavLink to="/soap" className={classes.link}>Популярные Сериалы</NavLink>
           </Typography>
 
           <Typography variant="h6" className={classes.title}>
-            <Link underline="none" href="/search" style={ {color: '#fff'} }>Поиск</Link>
+            <NavLink to="/search" className={classes.link}>Поиск</NavLink>
           </Typography>
 
         </Toolbar>
